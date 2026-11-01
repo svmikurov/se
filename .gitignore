@@ -1,0 +1,6 @@
+.venv/
+.envs/
+secrets/
+dumps/
+__pycache__/
+.mypy_cache/

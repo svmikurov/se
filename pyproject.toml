@@ -1,0 +1,26 @@
+[project]
+name = "se"
+version = "0.1.0"
+description = "Self education project."
+authors = [
+    { name = "Sergei Mikurov" ,email = "454004@mail.ru" },
+]
+readme = "README.md"
+requires-python = ">=3.13,<4.0"
+dependencies = [
+    "django>=6.1.2,<7.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=2.1.0,<2.3.0",
+    "ruff>=0.17.3,<0.18.0",
+    "django-stubs>=6.1,<7.0",
+]
+
+[tool.poetry]
+packages = [{include = "se", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

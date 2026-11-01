@@ -1,0 +1,27 @@
+{
+    "language": "en,ru",  
+    "words": [
+      // Project
+      "Mikurov",
+      "Микуров",
+      // Python
+      "__pycache__",
+      // Dependencies
+      "venv",
+      "mypy",
+      "pyflakes",
+      "pycodestyle",
+      "pydocstyle",
+      "isort",
+      "mccabe",
+      "pytest",
+      "testpaths",
+      // Docker & Commands
+      "runserver",
+      "noreload",
+      "healthcheck",
+      "isready",
+      "makemigrations",
+      "dumpdata",
+    ],
+  }

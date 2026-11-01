@@ -1,0 +1,14 @@
+# Database management via Django framework.
+
+FROM python:3.13-slim
+
+EXPOSE 8000
+
+WORKDIR /app
+
+COPY docker/db/admin/requirements.txt /temp/requirements.txt
+RUN pip3 install -r /temp/requirements.txt --no-cache-dir
+
+COPY src/se/infra/db/admin /app
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000", "--noreload"]

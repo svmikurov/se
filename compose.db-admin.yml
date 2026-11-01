@@ -1,0 +1,16 @@
+services:
+  admin:
+    build:
+      context: .
+      dockerfile: ./docker/db/admin/Dockerfile
+    ports: ["${ADMIN_HOST_PORT}:${ADMIN_SERVICE_PORT}"]
+    environment:
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_PASSWORD_FILE=/run/secrets/database_password
+    secrets:
+      - database_password
+    depends_on:
+      postgres:
+        condition: service_healthy
