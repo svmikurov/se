@@ -2,7 +2,7 @@
 # Project commands
 # =============================================================================
 
-include .envs/db.secrets
+-include .envs/db.secrets
 
 environments:  # Generate environment examples: ./envs/* from .envs.example/*
 	cp -r .envs.example/ .envs/

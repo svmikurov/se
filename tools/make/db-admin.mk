@@ -2,8 +2,8 @@
 # Database administration commands
 # =============================================================================
 
-include .envs/db
-include .envs/http
+-include .envs/db
+-include .envs/http
 
 SERVICE_NAME := admin
 DATABASE_NAME := postgres
