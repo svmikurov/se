@@ -15,6 +15,7 @@
       "isort",
       "mccabe",
       "pytest",
+      "psycopg",
       "testpaths",
       // Docker & Commands
       "runserver",
