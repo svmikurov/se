@@ -3,3 +3,5 @@
 django==6.0.6
 psycopg2-binary==2.9.12
 python-dotenv==1.2.3
+
+se-tools @ git+https://github.com/svmikurov/se-tools.git@v0.1.0
