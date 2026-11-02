@@ -9,8 +9,17 @@ services:
       - DATABASE_USER=${DATABASE_USER}
       - DATABASE_HOST=${DATABASE_HOST}
       - DATABASE_PASSWORD_FILE=/run/secrets/database_password
+      - DJANGO_SECRET_KEY_FILE=/run/secrets/django_secret_key
     secrets:
       - database_password
+      - django_secret_key
+    volumes:
+      - ./src/se/infra/db/admin:/app
+    command: python manage.py runserver 0.0.0.0:${ADMIN_SERVICE_PORT} --noreload
     depends_on:
       postgres:
         condition: service_healthy
+
+secrets:
+  django_secret_key:
+    file: ./secrets/django_secret_key

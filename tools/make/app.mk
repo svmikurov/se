@@ -11,7 +11,9 @@ environments:  # Generate environment examples: ./envs/* from .envs.example/*
 secrets:  # Generate secret examples: ./secrets/* from .envs/*.secrets
 	@mkdir -p secrets
 	@umask 077 && printf '%s\n' "$(DATABASE_PASSWORD)" > secrets/database_password
+	@umask 077 && printf '%s\n' "$(DJANGO_SECRET)" > secrets/django_secret_key
 	@chmod 600 secrets/database_password
+	@chmod 600 secrets/django_secret_key
 
 .PHONY: setup
 setup: ## Install project with dependencies

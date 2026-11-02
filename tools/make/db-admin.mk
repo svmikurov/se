@@ -2,16 +2,13 @@
 # Database administration commands
 # =============================================================================
 
--include .envs/db
--include .envs/http
-
 SERVICE_NAME := admin
 DATABASE_NAME := postgres
 LOG_TAIL = 200
 
 DC := docker compose \
 	--env-file .envs/db \
-	--env-file .envs/http \
+	--env-file .envs/db.admin \
 	-f compose.postgres.yml \
 	-f compose.db-admin.yml
 
