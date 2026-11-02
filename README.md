@@ -9,12 +9,17 @@ Project for self education
 - Poetry 2.x
 - GNU Make, just
 
-## Environments and secrets
+## Workflow
 
 ```bash
-make environments
-make secrets
+make environments   # Add environments example
+make secrets        # Add secrets example
+make admin-up       # Start container for bellow
+make admin-migrate  # Apply migrations
+make admin-su       # Create super user
 ```
+
+Service url: http://127.0.0.1:8100/admin/
 
 ## Show available commands
 
