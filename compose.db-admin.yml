@@ -8,6 +8,7 @@ services:
       - DATABASE_NAME=${DATABASE_NAME}
       - DATABASE_USER=${DATABASE_USER}
       - DATABASE_HOST=${DATABASE_HOST}
+      - DJANGO_DEBUG=${DJANGO_DEBUG}
       - DATABASE_PASSWORD_FILE=/run/secrets/database_password
       - DJANGO_SECRET_KEY_FILE=/run/secrets/django_secret_key
     secrets:
