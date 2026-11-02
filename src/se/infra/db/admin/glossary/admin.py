@@ -4,4 +4,4 @@ from .models import Definition
 
 
 @admin.register(Definition)
-class DefinitionAdmin(admin.ModelAdmin): ...
+class DefinitionAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]

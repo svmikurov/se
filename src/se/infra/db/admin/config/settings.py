@@ -3,25 +3,18 @@
 import os
 from pathlib import Path
 
+from se_tools import env, env_bool  # type: ignore[import-untyped]
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = (
-    'django-insecure-=gn_(_5yq)h^o18i4l1!@qq=s%62*_g-6x)pg_e&0t-1106l4k'
-)
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 
-DEBUG = True
+DEBUG = env_bool('DJANGO_DEBUG', default=False)
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
 ]
-
-
-def _read_secret(name: str, default: str | None = None) -> str | None:
-    file_path = os.environ.get(f'{name}_FILE')
-    if file_path:
-        return Path(file_path).read_text().rstrip('\n')
-    return os.environ.get(name, default)
 
 
 # Application definition
@@ -75,7 +68,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('DATABASE_NAME'),
         'USER': os.getenv('DATABASE_USER'),
-        'PASSWORD': _read_secret('DATABASE_PASSWORD'),
+        'PASSWORD': env('DATABASE_PASSWORD'),
         'HOST': os.getenv('DATABASE_HOST'),
         'PORT': os.getenv('DATABASE_PORT'),
     }
