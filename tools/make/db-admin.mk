@@ -33,6 +33,9 @@ admin-migrate-plan:  # Show migration plan without applying (dev)
 admin-makemigrations:  # Generate new migrations from model changes (dev)
 	$(DC) exec $(SERVICE_NAME) python manage.py makemigrations
 
+admin-su:  # Create super user
+	$(DC) exec $(SERVICE_NAME) python manage.py createsuperuser
+
 admin-logs:  # Follow application logs in real time
 	$(DC) logs -f --tail=$(LOG_TAIL) $(SERVICE_NAME)
 
