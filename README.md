@@ -21,6 +21,12 @@ make admin-su       # Create super user
 
 Service url: http://127.0.0.1:8100/admin/
 
+## Development
+
+```bash
+make setup          # Install project with development dependencies
+```
+
 ## Show available commands
 
 ```bash
