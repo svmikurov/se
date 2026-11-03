@@ -26,6 +26,7 @@ ignore = [
     "D101",     # Missing docstring in public class
     "D104",     # Missing docstring in public package
     "D105",     # Missing docstring in magic method
+    "D106",     # Missing docstring in public nested class
     "D107",     # Missing docstring in `__init__`
     "D203",     # 1 blank line required before class docstring
     "D211",     # No blank lines allowed before class docstring
