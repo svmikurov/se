@@ -10,7 +10,8 @@ from . import forms, models
 class DefinitionAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
     list_display = (
         'text',
-        'created_at',
+        'abbreviation',
+        'translation',
     )
 
 

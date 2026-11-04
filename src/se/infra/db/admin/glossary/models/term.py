@@ -7,10 +7,23 @@ from .source import Source
 
 class Definition(AbstractUserOwnedModel):
     DEFINITION_MAX_LENGTH = 70
+    ABBREVIATION_MAX_LENGTH = 10
 
     text = models.CharField(
         max_length=DEFINITION_MAX_LENGTH,
         verbose_name=_('Text'),
+    )
+    abbreviation = models.CharField(
+        max_length=ABBREVIATION_MAX_LENGTH,
+        verbose_name=_('Abbreviation'),
+        null=True,
+        blank=True,
+    )
+    translation = models.CharField(
+        max_length=DEFINITION_MAX_LENGTH,
+        verbose_name=_('Translation'),
+        null=True,
+        blank=True,
     )
 
     class Meta:
@@ -58,11 +71,12 @@ class Term(AbstractUserOwnedModel):
         on_delete=models.CASCADE,
         verbose_name=_('Term definition'),
     )
-
     explanation = models.ForeignKey(
         Explanation,
         on_delete=models.CASCADE,
         verbose_name=_('Term explanation'),
+        null=True,
+        blank=True,
     )
 
     class Meta:
