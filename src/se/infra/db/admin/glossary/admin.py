@@ -7,20 +7,28 @@ from . import forms, models
 
 
 @admin.register(models.Definition)
-class DefinitionAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
+class DefinitionAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
+    list_display = (
+        'text',
+        'created_at',
+    )
 
 
 @admin.register(models.Explanation)
-class ExplanationAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
+class ExplanationAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
+    list_display = (
+        'text',
+        'source',
+        'created_at',
+    )
 
 
 @admin.register(models.Term)
-class TermAdmin(admin.ModelAdmin):
+class TermAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
     form = forms.TermForm
-    list_display: tuple[str, ...] = (
+    list_display = (
         'definition',
         'explanation',
-        'user',
         'created_at',
     )
 
@@ -40,3 +48,11 @@ class TermAdmin(admin.ModelAdmin):
                 super().__init__(*args, **kw)
 
         return _BoundTermForm
+
+
+@admin.register(models.Author)
+class AuthorAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
+
+
+@admin.register(models.Source)
+class SourceAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]

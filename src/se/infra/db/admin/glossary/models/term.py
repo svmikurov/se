@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext as _
 
 from .base import AbstractUserOwnedModel
+from .source import Source
 
 
 class Definition(AbstractUserOwnedModel):
@@ -30,6 +31,13 @@ class Explanation(AbstractUserOwnedModel):
     text = models.CharField(
         max_length=EXPLANATION_MAX_LENGTH,
         verbose_name=_('Text'),
+    )
+    source = models.ForeignKey(
+        Source,
+        on_delete=models.PROTECT,
+        verbose_name=_('Source'),
+        null=True,
+        blank=True,
     )
 
     class Meta:
