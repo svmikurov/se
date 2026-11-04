@@ -2,6 +2,7 @@
 
 __all__ = [
     'Definition',
+    'Explanation',
 ]
 
-from .term import Definition
+from .term import Definition, Explanation
