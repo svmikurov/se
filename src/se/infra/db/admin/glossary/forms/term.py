@@ -41,6 +41,7 @@ class TermForm(forms.ModelForm):  # type: ignore[type-arg]
             self.instance.user if self.instance.pk else None
         )
         if self.instance and self.instance.pk:
+            self.fields['user'].initial = self.owner
             self.fields[
                 'definition_text'
             ].initial = self.instance.definition.text
