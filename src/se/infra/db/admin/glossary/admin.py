@@ -1,11 +1,15 @@
 from django.contrib import admin
 
-from .models import Definition, Explanation
+from . import models
 
 
-@admin.register(Definition)
+@admin.register(models.Definition)
 class DefinitionAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
 
 
-@admin.register(Explanation)
+@admin.register(models.Explanation)
 class ExplanationAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
+
+
+@admin.register(models.Term)
+class TermAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]

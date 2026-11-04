@@ -42,3 +42,28 @@ class Explanation(AbstractUserOwnedModel):
 
     def __str__(self) -> str:
         return str(self.text)
+
+
+class Term(AbstractUserOwnedModel):
+    definition = models.ForeignKey(
+        Definition,
+        on_delete=models.CASCADE,
+        verbose_name=_('Term definition'),
+    )
+
+    explanation = models.ForeignKey(
+        Explanation,
+        on_delete=models.CASCADE,
+        verbose_name=_('Term explanation'),
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['definition', 'explanation'],
+                name='%(app_label)s_definition_explanation_uniq',
+            ),
+        ]
+
+    def __str__(self) -> str:
+        return str(self.definition)
