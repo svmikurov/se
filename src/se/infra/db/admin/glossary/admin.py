@@ -1,6 +1,7 @@
 from typing import Any
 
 from django.contrib import admin
+from django.db.models import QuerySet
 from django.http import HttpRequest
 
 from . import forms, models
@@ -49,6 +50,10 @@ class TermAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
         'explanation',
         'created_at',
     )
+    search_fields = (
+        'definition__text',
+        'explanation__text',
+    )
 
     def get_form(
         self,
@@ -74,3 +79,39 @@ class AuthorAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
 
 @admin.register(models.Source)
 class SourceAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
+
+
+@admin.register(models.TermLink)
+class TermLinkAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
+    list_display = (
+        'parent',
+        'child',
+        'user',
+        'created_at',
+    )
+    list_filter = ('user',)
+    search_fields = (
+        'parent__definition__text',
+        'child__definition__text',
+    )
+    autocomplete_fields = ('parent', 'child')
+    exclude = ('user',)
+    readonly_fields = ('created_at', 'updated_at')
+
+    def get_queryset(self, request: HttpRequest) -> QuerySet[models.TermLink]:
+        return (
+            super()
+            .get_queryset(request)
+            .select_related('parent', 'child', 'user')
+        )
+
+    def save_model(
+        self,
+        request: HttpRequest,
+        obj: models.TermLink,
+        form: Any,
+        change: bool,
+    ) -> None:
+        if not change and not obj.user_id:  # type: ignore[attr-defined]
+            obj.user = request.user
+        super().save_model(request, obj, form, change)

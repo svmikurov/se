@@ -8,7 +8,8 @@ __all__ = [
     # Source
     'Author',
     'Source',
+    'TermLink',
 ]
 
 from .source import Author, Source
-from .term import Definition, Explanation, Term
+from .term import Definition, Explanation, Term, TermLink
