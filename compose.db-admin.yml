@@ -5,21 +5,23 @@ services:
       dockerfile: ./docker/db/admin/Dockerfile
     ports: ["${ADMIN_HOST_PORT}:${ADMIN_SERVICE_PORT}"]
     environment:
-      - DATABASE_NAME=${DATABASE_NAME}
-      - DATABASE_USER=${DATABASE_USER}
-      - DATABASE_HOST=${DATABASE_HOST}
-      - DJANGO_DEBUG=${DJANGO_DEBUG}
-      - DATABASE_PASSWORD_FILE=/run/secrets/database_password
-      - DJANGO_SECRET_KEY_FILE=/run/secrets/django_secret_key
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_HOST: ${DATABASE_HOST}
+      DJANGO_DEBUG: ${DJANGO_DEBUG:-false}
+      DATABASE_PASSWORD_FILE: /run/secrets/database_password
+      DJANGO_SECRET_KEY_FILE: /run/secrets/django_secret_key
     secrets:
       - database_password
       - django_secret_key
     volumes:
       - ./src/se/infra/db/admin:/app
     command: python manage.py runserver 0.0.0.0:${ADMIN_SERVICE_PORT} --noreload
+    init: true
     depends_on:
       postgres:
         condition: service_healthy
+    restart: unless-stopped
 
 secrets:
   django_secret_key:
