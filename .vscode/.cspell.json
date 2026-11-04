@@ -6,6 +6,9 @@
       "Микуров",
       // Python
       "__pycache__",
+      "PYTHONUNBUFFERED",
+      "PYTHONDONTWRITEBYTECODE",
+      "PYTHONPATH",
       // Dependencies
       "venv",
       "mypy",
@@ -16,6 +19,7 @@
       "mccabe",
       "pytest",
       "psycopg",
+      "dotenv",
       "testpaths",
       // Docker & Commands
       "runserver",
