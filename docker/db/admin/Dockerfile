@@ -1,6 +1,22 @@
 # Database management via Django framework.
 
-FROM python:3.13-slim
+FROM python:3.13-slim AS builder
+
+WORKDIR /build
+
+# Some project dependencies installed from GitHub repositories
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends git \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY docker/db/admin/requirements.txt /temp/requirements.txt
+RUN pip3 install \
+    --prefix=/install \
+    --no-cache-dir \
+    -r /temp/requirements.txt
+
+
+FROM python:3.13-slim AS dev
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -8,11 +24,6 @@ ENV PYTHONUNBUFFERED=1 \
     
 WORKDIR /app
 
-RUN apt-get update \
- && apt-get install -y --no-install-recommends git \
- && rm -rf /var/lib/apt/lists/*
+COPY --from=builder /install /usr/local
 
-COPY docker/db/admin/requirements.txt /temp/requirements.txt
-RUN pip3 install -r /temp/requirements.txt --no-cache-dir
-
-COPY src/se/infra/db/admin  /app
+COPY src/se/infra/db/admin /app
