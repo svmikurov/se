@@ -12,7 +12,24 @@ class DefinitionAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
         'text',
         'abbreviation',
         'translation',
+        'user',
+        'created_at',
     )
+    search_fields = ('text', 'abbreviation', 'translation')
+    list_filter = ('user',)
+    exclude = ('user',)
+    readonly_fields = ('created_at', 'updated_at')
+
+    def save_model(
+        self,
+        request: HttpRequest,
+        obj: models.Definition,
+        form: Any,
+        change: bool,
+    ) -> None:
+        if not change and not obj.user_id:  # type: ignore[attr-defined]
+            obj.user = request.user
+        super().save_model(request, obj, form, change)
 
 
 @admin.register(models.Explanation)
