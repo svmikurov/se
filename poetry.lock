@@ -543,7 +543,7 @@ develop = false
 type = "git"
 url = "https://github.com/svmikurov/se-tools.git"
 reference = "v0.1.0"
-resolved_reference = "463927e47ef03e9e7cd168c0cc9ac46c10d4c943"
+resolved_reference = "52dece88aeab50c18296c7c02f4441431982fdff"
 
 [[package]]
 name = "sqlparse"
