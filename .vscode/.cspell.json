@@ -1,5 +1,5 @@
 {
-    "language": "en,ru",  
+    "language": "en,ru",
     "words": [
       // Project
       "Mikurov",
@@ -25,4 +25,9 @@
       "makemigrations",
       "dumpdata",
     ],
-  }
+    "ignorePaths": [
+        "**/node_modules/**",
+        "**/.venv/**",
+        "**/__pycache__/**"
+    ]
+}
