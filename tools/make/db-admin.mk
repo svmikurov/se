@@ -5,7 +5,7 @@
 SERVICE_NAME := admin
 DATABASE_NAME := postgres
 LOG_TAIL = 200
-DUMP_MODELS := glossary
+DUMP_MODELS := auth.user glossary
 
 DC := docker compose \
 	--env-file .envs/db \
