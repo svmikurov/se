@@ -16,6 +16,7 @@ services:
       - django_secret_key
     volumes:
       - ./src/se/infra/db/admin:/app
+      - ./dumps:/app/dumps
     command: python manage.py runserver 0.0.0.0:${ADMIN_SERVICE_PORT} --noreload
     init: true
     depends_on:
