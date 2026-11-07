@@ -23,15 +23,18 @@ class TermForm(forms.ModelForm):  # type: ignore[type-arg]
     abbreviation_text = forms.CharField(
         label=_('Abbreviation'),
         max_length=Definition.ABBREVIATION_MAX_LENGTH,
+        required=False,
     )
     translation_text = forms.CharField(
-        label=_('Definition'),
+        label=_('Translation'),
         max_length=Definition.DEFINITION_MAX_LENGTH,
+        required=False,
     )
     explanation_text = forms.CharField(
         label=_('Explanation'),
         max_length=Explanation.EXPLANATION_MAX_LENGTH,
         widget=forms.Textarea,
+        required=False,
     )
 
     owner: AbstractBaseUser | None = None

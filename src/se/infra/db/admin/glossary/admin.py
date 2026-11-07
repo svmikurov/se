@@ -1,9 +1,14 @@
 from typing import Any
 
 from django.contrib import admin
+from django.db.models import QuerySet
 from django.http import HttpRequest
+from django.template.defaultfilters import truncatechars
+from django.utils import timezone
 
-from . import forms, models
+from . import models
+
+TRUNCATE_LENGTH = 40
 
 
 @admin.register(models.Definition)
@@ -34,38 +39,54 @@ class DefinitionAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
 
 @admin.register(models.Explanation)
 class ExplanationAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
-    list_display = (
-        'text',
-        'source',
-        'created_at',
-    )
+    list_display = ('text', 'source', 'created_at')
+    search_fields = ('text',)
+    exclude = ('user',)
+
+    def save_model(
+        self,
+        request: HttpRequest,
+        obj: models.Explanation,
+        form: Any,
+        change: bool,
+    ) -> None:
+        if not change and not obj.user_id:  # type: ignore[attr-defined]
+            obj.user = request.user
+        super().save_model(request, obj, form, change)
 
 
 @admin.register(models.Term)
 class TermAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
-    form = forms.TermForm
     list_display = (
         'definition',
-        'explanation',
-        'created_at',
+        'explanation_short',
+        'created_short',
     )
+    list_filter = ('user',)
+    search_fields = ('definition__text', 'explanation__text')
+    autocomplete_fields = ('definition', 'explanation')
+    exclude = ('user',)
+    readonly_fields = ('created_at', 'updated_at')
 
-    def get_form(
+    def save_model(
         self,
         request: HttpRequest,
-        obj: models.Term | None = None,
-        change: bool = False,
-        **kwargs: Any,
-    ) -> type[forms.TermForm]:
-        form_class = super().get_form(request, obj, change, **kwargs)
-        owner = obj.user if obj and obj.pk else request.user
+        obj: models.Term,
+        form: Any,
+        change: bool,
+    ) -> None:
+        if not change and not obj.user_id:  # type: ignore[attr-defined]
+            obj.user = request.user
+        super().save_model(request, obj, form, change)
 
-        class _BoundTermForm(form_class):  # type: ignore[misc, valid-type]
-            def __init__(self, *args: Any, **kw: Any) -> None:
-                kw.setdefault('owner', owner)
-                super().__init__(*args, **kw)
+    @admin.display(description='Explanation')
+    def explanation_short(self, obj: models.Term) -> str:
+        text = str(obj.explanation) if obj.explanation is not None else ''
+        return truncatechars(text, TRUNCATE_LENGTH) or '-'
 
-        return _BoundTermForm
+    @admin.display(description='Created', ordering='created_at')
+    def created_short(self, obj: models.Term) -> str:
+        return timezone.localtime(obj.created_at).strftime('%Y-%m-%d')
 
 
 @admin.register(models.Author)
@@ -74,3 +95,38 @@ class AuthorAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
 
 @admin.register(models.Source)
 class SourceAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
+
+
+@admin.register(models.TermLink)
+class TermLinkAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
+    list_display = (
+        'parent',
+        'child',
+        'child__definition__translation',
+    )
+    list_filter = ('user',)
+    search_fields = (
+        'parent__definition__text',
+        'child__definition__text',
+    )
+    autocomplete_fields = ('parent', 'child')
+    exclude = ('user',)
+    readonly_fields = ('created_at', 'updated_at')
+
+    def get_queryset(self, request: HttpRequest) -> QuerySet[models.TermLink]:
+        return (
+            super()
+            .get_queryset(request)
+            .select_related('parent', 'child', 'user')
+        )
+
+    def save_model(
+        self,
+        request: HttpRequest,
+        obj: models.TermLink,
+        form: Any,
+        change: bool,
+    ) -> None:
+        if not change and not obj.user_id:  # type: ignore[attr-defined]
+            obj.user = request.user
+        super().save_model(request, obj, form, change)

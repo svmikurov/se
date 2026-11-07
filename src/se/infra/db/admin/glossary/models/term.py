@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext as _
 
@@ -66,7 +67,7 @@ class Explanation(AbstractUserOwnedModel):
 
 
 class Term(AbstractUserOwnedModel):
-    definition = models.ForeignKey(
+    definition = definition = models.ForeignKey(
         Definition,
         on_delete=models.CASCADE,
         verbose_name=_('Term definition'),
@@ -89,3 +90,65 @@ class Term(AbstractUserOwnedModel):
 
     def __str__(self) -> str:
         return str(self.definition)
+
+
+class TermLink(AbstractUserOwnedModel):
+    parent = models.ForeignKey(
+        Term,
+        on_delete=models.CASCADE,
+        related_name='child_links',
+        verbose_name=_('Parent term'),
+    )
+    child = models.ForeignKey(
+        Term,
+        on_delete=models.CASCADE,
+        related_name='parent_links',
+        verbose_name=_('Child term'),
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['parent', 'child'],
+                name='%(app_label)s_%(class)s_parent_child_uniq',
+            ),
+            models.CheckConstraint(
+                condition=~models.Q(parent=models.F('child')),
+                name='%(app_label)s_%(class)s_no_self_loop',
+            ),
+        ]
+        verbose_name = _('Term link')
+        verbose_name_plural = _('Term links')
+
+    def __str__(self) -> str:
+        return f'{self.parent} -> {self.child}'
+
+    def clean(self) -> None:
+        super().clean()
+        if not self.parent_id or not self.child_id:  # type: ignore
+            return
+        if self.parent_id == self.child_id:  # type: ignore
+            raise ValidationError(
+                _('A term cannot be its own parent.'),
+            )
+        if self._creates_cycle():
+            raise ValidationError(
+                _('This link would create a cycle in the hierarchy.'),
+            )
+
+    def _creates_cycle(self) -> bool:
+        seen: set[int] = set()
+        stack: list[int] = [self.parent_id]  # type: ignore
+        while stack:
+            node_id = stack.pop()
+            if node_id == self.child_id:  # type: ignore
+                return True
+            if node_id in seen:
+                continue
+            seen.add(node_id)
+            stack.extend(
+                TermLink.objects.filter(child_id=node_id).values_list(  # type: ignore
+                    'parent_id', flat=True
+                )
+            )
+        return False
