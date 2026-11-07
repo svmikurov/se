@@ -4,3 +4,6 @@ secrets/
 dumps/
 __pycache__/
 .mypy_cache/
+*.bkp
+docs/**/*.html
+docs/**/*.xml

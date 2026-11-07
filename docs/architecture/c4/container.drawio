@@ -1,0 +1,113 @@
+<mxfile host="Electron">
+  <diagram name="Страница-1" id="LcZgIpPOxwhE-jDTZL4o">
+    <mxGraphModel dx="1036" dy="640" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <object placeholders="1" c4Name="Student" c4Type="Person" c4Description="Определяет/Добавляет учебный материал и изучает его." label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="jTehi0E7JQVAJ2-tcgCI-1">
+          <mxCell parent="1" style="html=1;fontSize=11;dashed=0;whiteSpace=wrap;fillColor=#083F75;strokeColor=#06315C;fontColor=#ffffff;shape=mxgraph.c4.person2;align=center;metaEdit=1;points=[[0.5,0,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0]];resizable=0;" vertex="1">
+            <mxGeometry height="180" width="200" x="240" y="40" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="Self education platform" c4Type="SystemScopeBoundary" c4Application="Self education platform" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;&lt;div style=&quot;text-align: left&quot;&gt;%c4Name%&lt;/div&gt;&lt;/b&gt;&lt;/font&gt;&lt;div style=&quot;text-align: left&quot;&gt;[%c4Application%]&lt;/div&gt;" id="jTehi0E7JQVAJ2-tcgCI-2">
+          <mxCell parent="1" style="rounded=1;fontSize=11;whiteSpace=wrap;html=1;dashed=1;arcSize=20;fillColor=none;strokeColor=#666666;fontColor=#333333;labelBackgroundColor=none;align=left;verticalAlign=bottom;labelBorderColor=none;spacingTop=0;spacing=10;dashPattern=8 4;metaEdit=1;rotatable=0;perimeter=rectanglePerimeter;noLabel=0;labelPadding=0;allowArrows=0;connectable=0;expand=0;recursiveResize=0;editable=1;pointerEvents=0;absoluteArcSize=1;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
+            <mxGeometry height="800" width="600" x="40" y="280" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="WEB" c4Type="Container" c4Technology="Django" c4Description="Принимает запросы от браузера, рендерит HTML, вызывает Core по HTTP/REST." label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="jTehi0E7JQVAJ2-tcgCI-3">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;labelBackgroundColor=none;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
+            <mxGeometry height="120" width="240" x="80" y="300" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="API" c4Type="Container" c4Technology="FastAPI" c4Description="Отдает JSON для внешних систем/мобильных клиентов, вызывает Core по HTTP/REST." label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="jTehi0E7JQVAJ2-tcgCI-4">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;labelBackgroundColor=none;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
+            <mxGeometry height="120" width="240" x="360" y="300" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="Application" c4Type="Container" c4Technology="Python" c4Description="Логика уровня приложание, без привязки к UI и к БД." label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="jTehi0E7JQVAJ2-tcgCI-5">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;labelBackgroundColor=none;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
+            <mxGeometry height="120" width="240" x="220" y="500" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Name="Database" c4Type="Container" c4Technology="PostgreSQL" c4Description="Учебный материал студента" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%:&amp;nbsp;%c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="jTehi0E7JQVAJ2-tcgCI-6">
+          <mxCell parent="1" style="shape=cylinder3;size=15;whiteSpace=wrap;html=1;boundedLbl=1;rounded=0;labelBackgroundColor=none;fillColor=#23A2D9;fontSize=12;fontColor=#ffffff;align=center;strokeColor=#0E7DAD;metaEdit=1;points=[[0.5,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.5,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];resizable=0;" vertex="1">
+            <mxGeometry height="120" width="240" x="220" y="720" as="geometry" />
+          </mxCell>
+        </object>
+        <object placeholders="1" c4Type="Relationship" id="jTehi0E7JQVAJ2-tcgCI-8">
+          <mxCell edge="1" parent="1" source="jTehi0E7JQVAJ2-tcgCI-1" style="html=1;fontSize=11;fontColor=default;metaEdit=1;edgeStyle=orthogonalEdgeStyle;defaultLabelBackgroundColor=page;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;align=center;verticalAlign=middle;fontFamily=Helvetica;labelBackgroundColor=default;resizable=0;fillColor=none;gradientColor=none;">
+            <mxGeometry relative="1" width="240" as="geometry">
+              <mxPoint x="360" y="230" as="sourcePoint" />
+              <mxPoint x="340" y="280" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </object>
+        <mxCell id="jTehi0E7JQVAJ2-tcgCI-10" connectable="0" parent="jTehi0E7JQVAJ2-tcgCI-8" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];inheritText=1;defaultLabelBackgroundColor=page;" value="&lt;font style=&quot;font-size: 17px;&quot;&gt;HTTPS&lt;/font&gt;" vertex="1">
+          <mxGeometry relative="1" x="0.1333" y="2" as="geometry">
+            <mxPoint y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <object placeholders="1" c4Type="Relationship" id="jTehi0E7JQVAJ2-tcgCI-11">
+          <mxCell edge="1" parent="1" source="jTehi0E7JQVAJ2-tcgCI-3" style="html=1;fontSize=11;fontColor=default;metaEdit=1;edgeStyle=orthogonalEdgeStyle;defaultLabelBackgroundColor=page;entryX=0.25;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;align=center;verticalAlign=middle;fontFamily=Helvetica;labelBackgroundColor=default;resizable=0;fillColor=none;gradientColor=none;" target="jTehi0E7JQVAJ2-tcgCI-5">
+            <mxGeometry relative="1" width="240" x="-0.1" as="geometry">
+              <Array as="points">
+                <mxPoint x="200" y="470" />
+                <mxPoint x="280" y="470" />
+              </Array>
+              <mxPoint x="200" y="440" as="sourcePoint" />
+              <mxPoint x="330" y="480" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </object>
+        <mxCell id="jTehi0E7JQVAJ2-tcgCI-12" connectable="0" parent="jTehi0E7JQVAJ2-tcgCI-11" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];inheritText=1;defaultLabelBackgroundColor=page;" value="&lt;font style=&quot;font-size: 17px;&quot;&gt;HTTP/REST&lt;/font&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.5707" as="geometry">
+            <mxPoint y="-4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <object placeholders="1" c4Type="Relationship" id="jTehi0E7JQVAJ2-tcgCI-15">
+          <mxCell edge="1" parent="1" source="jTehi0E7JQVAJ2-tcgCI-4" style="html=1;fontSize=11;fontColor=default;metaEdit=1;edgeStyle=orthogonalEdgeStyle;defaultLabelBackgroundColor=page;entryX=0.75;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;align=center;verticalAlign=middle;fontFamily=Helvetica;labelBackgroundColor=default;resizable=0;fillColor=none;gradientColor=none;" target="jTehi0E7JQVAJ2-tcgCI-5">
+            <mxGeometry relative="1" width="240" x="0.0909" as="geometry">
+              <Array as="points">
+                <mxPoint x="480" y="470" />
+                <mxPoint x="400" y="470" />
+              </Array>
+              <mxPoint x="480" y="440" as="sourcePoint" />
+              <mxPoint x="610" y="560" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </object>
+        <mxCell id="jTehi0E7JQVAJ2-tcgCI-17" connectable="0" parent="jTehi0E7JQVAJ2-tcgCI-15" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];inheritText=labelPadding;fontSize=11;fontColor=default;defaultLabelBackgroundColor=page;fontFamily=Helvetica;labelBackgroundColor=default;" value="&lt;span style=&quot;font-size: 17px;&quot;&gt;HTTP/REST&lt;/span&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.4091" as="geometry">
+            <mxPoint y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <object placeholders="1" c4Type="Relationship" id="jTehi0E7JQVAJ2-tcgCI-18">
+          <mxCell edge="1" parent="1" source="jTehi0E7JQVAJ2-tcgCI-5" style="html=1;fontSize=11;fontColor=default;metaEdit=1;edgeStyle=orthogonalEdgeStyle;defaultLabelBackgroundColor=page;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;align=center;verticalAlign=middle;fontFamily=Helvetica;labelBackgroundColor=default;resizable=0;fillColor=none;gradientColor=none;" target="jTehi0E7JQVAJ2-tcgCI-6">
+            <mxGeometry relative="1" width="240" as="geometry">
+              <mxPoint x="360" y="740" as="sourcePoint" />
+              <mxPoint x="600" y="740" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </object>
+        <mxCell id="jTehi0E7JQVAJ2-tcgCI-23" connectable="0" parent="jTehi0E7JQVAJ2-tcgCI-18" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];inheritText=1;defaultLabelBackgroundColor=page;" value="&lt;pre&gt;&lt;font style=&quot;font-size: 17px;&quot;&gt;Читает/Пишет через Repository&lt;br&gt;[SQL]&lt;/font&gt;&lt;/pre&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.08" y="-3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jTehi0E7JQVAJ2-tcgCI-27" edge="1" parent="1" source="jTehi0E7JQVAJ2-tcgCI-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;" target="jTehi0E7JQVAJ2-tcgCI-6" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jTehi0E7JQVAJ2-tcgCI-28" connectable="0" parent="jTehi0E7JQVAJ2-tcgCI-27" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];inheritText=1;defaultLabelBackgroundColor=page;" value="&lt;font style=&quot;font-size: 17px;&quot;&gt;SQL&lt;/font&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.012" y="-2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <object placeholders="1" c4Name="Admin App" c4Type="Container" c4Technology="Django Admin" c4Description="Управляет схемами БД." label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#E6E6E6&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="jTehi0E7JQVAJ2-tcgCI-25">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;labelBackgroundColor=none;fillColor=#23A2D9;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0E7DAD;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1">
+            <mxGeometry height="120" width="240" x="220" y="900" as="geometry" />
+          </mxCell>
+        </object>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
