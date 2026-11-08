@@ -23,6 +23,9 @@ admin-stop:  # Stop database Django administration
 admin-down:  # Stop and remove containers and network (DB volume kept)
 	$(DC) down
 
+admin-down-hard:  # DANGER: down + drop named volume postgres-data
+	$(DC) down --volumes
+
 admin-migrate:  # Apply Django migrations (dev)
 	$(DC) exec $(SERVICE_NAME) python manage.py migrate
 
@@ -59,6 +62,7 @@ admin-help:
 	@printf "$(HELP_FORMAT)" "admin-up"              "Run database Django administration (build + up -d)"
 	@printf "$(HELP_FORMAT)" "admin-stop"            "Stop admin container (keeps it around)"
 	@printf "$(HELP_FORMAT)" "admin-down"            "Stop and remove containers and network (DB volume kept)"
+	@printf "$(HELP_FORMAT)" "admin-down-hard"       "DANGER: down + drop named volume postgres-data"
 	@echo ""
 	@printf "$(HELP_FORMAT)" "admin-migrate"         "Apply Django migrations (dev)"
 	@printf "$(HELP_FORMAT)" "admin-migrate-plan"    "Show migration plan without applying (dev)"

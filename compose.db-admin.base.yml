@@ -17,7 +17,6 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    restart: unless-stopped
 
 secrets:
   django_secret_key:

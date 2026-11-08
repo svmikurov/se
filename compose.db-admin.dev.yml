@@ -4,6 +4,8 @@ services:
   admin:
     build:
       target: dev
+    environment:
+      DJANGO_DEBUG: "true"
     user: "${DEV_UID:-1000}:${DEV_GID:-1000}"
     ports: ["${ADMIN_HOST_PORT}:${ADMIN_SERVICE_PORT}"]
     volumes:
