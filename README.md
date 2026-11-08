@@ -6,14 +6,16 @@ Self-education project
 
 ### Run project locally
 
-- Docker
-- GNU Make
+- Docker Engine ≥ 24.0
+- Docker Compose ≥ 2.20
+- Linux (x86_64/arm64)
+- GNU Make ≥ 4.3
 
 ### Development (additional)
 
-- Python 3.13+
-- Poetry 2.x
-- just
+- Python ≥ 3.13
+- Poetry ≥ 2.0
+- just ≥ 1.0
 
 ## Workflow
 
