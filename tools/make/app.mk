@@ -6,7 +6,7 @@
 -include .envs/db.admin.secrets
 
 environments:  # Generate environment examples: ./envs/* from .envs.example/*
-	cp -r .envs.example/ .envs/
+	cp -r .envs.example/. .envs/
 
 .PHONY: secrets
 secrets:  # Generate secret examples: ./secrets/* from .envs/*.secrets
