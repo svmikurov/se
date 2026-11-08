@@ -3,7 +3,6 @@ services:
     build:
       context: .
       dockerfile: ./docker/db/admin/Dockerfile
-    ports: ["${ADMIN_HOST_PORT}:${ADMIN_SERVICE_PORT}"]
     environment:
       DATABASE_NAME: ${DATABASE_NAME}
       DATABASE_USER: ${DATABASE_USER}
@@ -14,14 +13,11 @@ services:
     secrets:
       - database_password
       - django_secret_key
-    volumes:
-      - ./src/se/infra/db/admin:/app
-      - ./dumps:/app/dumps
-    command: python manage.py runserver 0.0.0.0:${ADMIN_SERVICE_PORT} --noreload
     init: true
     depends_on:
       postgres:
         condition: service_healthy
+    restart: unless-stopped
 
 secrets:
   django_secret_key:

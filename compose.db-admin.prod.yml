@@ -1,0 +1,8 @@
+name: se-prod
+
+services:
+  admin:
+    build:
+      target: prod
+    environment:
+      DJANGO_DEBUG: "false"

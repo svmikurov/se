@@ -1,0 +1,12 @@
+name: se-dev
+
+services:
+  admin:
+    build:
+      target: dev
+    user: "${DEV_UID:-1000}:${DEV_GID:-1000}"
+    ports: ["${ADMIN_HOST_PORT}:${ADMIN_SERVICE_PORT}"]
+    volumes:
+      - ./src/se/infra/db/admin:/app
+      - ./dumps:/app/dumps
+    command: python manage.py runserver 0.0.0.0:${ADMIN_SERVICE_PORT} --noreload

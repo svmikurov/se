@@ -4,20 +4,21 @@
 
 SERVICE_NAME := admin
 DATABASE_NAME := postgres
-LOG_TAIL = 200
+LOG_TAIL := 200
 DUMP_MODELS := auth.user glossary
 
 DC := docker compose \
 	--env-file .envs/db \
 	--env-file .envs/db.admin \
 	-f compose.postgres.yml \
-	-f compose.db-admin.yml
+	-f compose.db-admin.base.yml \
+	-f compose.db-admin.dev.yml
 
 admin-up:  # Run database Django administration
 	$(DC) up -d --build
 
 admin-stop:  # Stop database Django administration
-	$(DC) stop admin
+	$(DC) stop $(SERVICE_NAME)
 
 admin-down:  # Stop and remove containers and network (DB volume kept)
 	$(DC) down
