@@ -1,27 +1,44 @@
 # SE
 
-Project for self education
+Self-education project
 
 ## Requirements
 
+### Run project locally
+
+- Docker
+- GNU Make
+
+### Development (additional)
+
 - Python 3.13+
-- PostgreSQL 14+
 - Poetry 2.x
-- GNU Make, just
+- just
 
 ## Workflow
+
+### Development mode
+
+#### Add environments and secrets examples
+
+See: `.envs.example`
 
 ```bash
 make environments   # Add environments example
 make secrets        # Add secrets example
-make admin-up       # Start container for bellow
-make admin-migrate  # Apply migrations
-make admin-su       # Create super user
 ```
 
-Service url: http://127.0.0.1:8100/admin/
+#### Database administration
 
-## Development
+```bash
+make admin-up       # Start container for below
+make admin-migrate  # Apply migrations
+make admin-su       # Create superuser
+```
+
+Service URL: http://127.0.0.1:8100/admin/
+
+#### Add dependencies for development
 
 ```bash
 make setup          # Install project with development dependencies
