@@ -15,6 +15,7 @@ DC := docker compose \
 	-f compose.db-admin.dev.yml
 
 admin-up:  # Run database Django administration
+	@mkdir -p dumps
 	$(DC) up -d --build
 
 admin-stop:  # Stop database Django administration
@@ -46,7 +47,6 @@ admin-logs-db:  # Follow Postgres logs in real time
 
 admin-dumpdata:  # Dump models to dumps/dump-<timestamp>.json (DUMP_MODELS=$(DUMP_MODELS))
 	@test -n "$(DUMP_MODELS)" || { echo "ERROR: DUMP_MODELS is empty"; exit 1; }
-	@mkdir -p dumps
 	$(DC) exec -T $(SERVICE_NAME) python manage.py dumpdata $(DUMP_MODELS) --indent 2 > dumps/dump-$(shell date +%Y%m%d-%H%M%S).json
 	@echo "dump written to dumps/"
 
