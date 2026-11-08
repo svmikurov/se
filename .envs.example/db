@@ -2,4 +2,4 @@ DATABASE_NAME=se
 DATABASE_USER=se_user
 DATABASE_HOST=postgres
 
-DUMP_MODELS=glossary
+DUMP_MODELS=auth.user, glossary
