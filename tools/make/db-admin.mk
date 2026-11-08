@@ -40,7 +40,7 @@ admin-logs:  # Follow application logs in real time
 admin-logs-db:  # Follow Postgres logs in real time
 	$(DC) logs -f --tail=$(LOG_TAIL) $(DATABASE_NAME)
 
-admin-dumpdata:
+admin-dumpdata:  # Dump models to dumps/dump-<timestamp>.json (DUMP_MODELS=$(DUMP_MODELS))
 	@test -n "$(DUMP_MODELS)" || { echo "ERROR: DUMP_MODELS is empty"; exit 1; }
 	@mkdir -p dumps
 	$(DC) exec -T $(SERVICE_NAME) python manage.py dumpdata $(DUMP_MODELS) --indent 2 > dumps/dump-$(shell date +%Y%m%d-%H%M%S).json
@@ -55,5 +55,19 @@ admin-help:
 	@echo "Database administration commands help"
 	@echo "=================================================================="
 	@echo ""
-	@printf "$(HELP_FORMAT)" "admin-run"	"Run database Django administration"
+	@printf "$(HELP_FORMAT)" "admin-up"              "Run database Django administration (build + up -d)"
+	@printf "$(HELP_FORMAT)" "admin-stop"            "Stop admin container (keeps it around)"
+	@printf "$(HELP_FORMAT)" "admin-down"            "Stop and remove containers and network (DB volume kept)"
+	@echo ""
+	@printf "$(HELP_FORMAT)" "admin-migrate"         "Apply Django migrations (dev)"
+	@printf "$(HELP_FORMAT)" "admin-migrate-plan"    "Show migration plan without applying (dev)"
+	@printf "$(HELP_FORMAT)" "admin-makemigrations"  "Generate new migrations from model changes (dev)"
+	@printf "$(HELP_FORMAT)" "admin-su"              "Create Django superuser"
+	@echo ""
+	@printf "$(HELP_FORMAT)" "admin-logs"            "Follow application logs in real time (tail=$(LOG_TAIL))"
+	@printf "$(HELP_FORMAT)" "admin-logs-db"         "Follow Postgres logs in real time (tail=$(LOG_TAIL))"
+	@echo ""
+	@printf "$(HELP_FORMAT)" "admin-dumpdata"        "Dump models to dumps/dump-<timestamp>.json (DUMP_MODELS=$(DUMP_MODELS))"
+	@echo ""
+	@printf "$(HELP_FORMAT)" "admin-help"            "Show this help"
 	@echo ""
