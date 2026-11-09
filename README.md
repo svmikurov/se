@@ -46,6 +46,15 @@ Service URL: http://127.0.0.1:8100/admin/
 make setup          # Install project with development dependencies
 ```
 
+#### Project documentation
+
+```bash
+docs-docker-build:  # Build documentation image
+docs-docker-run:    # Run documentation server on http://localhost:$(DOCS_HOST_PORT)
+```
+
+`DOCS_HOST_PORT` is defined in `.envs/docs` file
+
 ## Show available commands
 
 ```bash
