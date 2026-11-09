@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Applications
+    'foreign.apps.ForeignConfig',
     'glossary.apps.GlossaryConfig',
 ]
 
