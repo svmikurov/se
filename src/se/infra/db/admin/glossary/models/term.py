@@ -40,7 +40,7 @@ class Definition(AbstractUserOwnedModel):
 
 
 class Explanation(AbstractUserOwnedModel):
-    EXPLANATION_MAX_LENGTH = 200
+    EXPLANATION_MAX_LENGTH = 300
 
     text = models.CharField(
         max_length=EXPLANATION_MAX_LENGTH,
