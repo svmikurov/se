@@ -4,6 +4,9 @@ secrets/
 dumps/
 __pycache__/
 .mypy_cache/
+
+# Documentation
+*.drawio
 *.bkp
 docs/**/*.html
 docs/**/*.xml
