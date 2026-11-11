@@ -130,3 +130,14 @@ class TermLinkAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
         if not change and not obj.user_id:  # type: ignore[attr-defined]
             obj.user = request.user
         super().save_model(request, obj, form, change)
+
+
+# Tags
+
+
+@admin.register(models.Tag)
+class TagAdmin(admin.ModelAdmin): ...
+
+
+@admin.register(models.DefinitionTag)
+class DefinitionTagAdmin(admin.ModelAdmin): ...
