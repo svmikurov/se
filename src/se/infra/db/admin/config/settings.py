@@ -14,6 +14,7 @@ DEBUG = env_bool('DJANGO_DEBUG', default=False)
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
+    'admin',
 ]
 
 

@@ -10,3 +10,7 @@ __pycache__/
 *.bkp
 docs/**/*.html
 docs/**/*.xml
+
+# E2E
+test-results/
+playwright-report/
