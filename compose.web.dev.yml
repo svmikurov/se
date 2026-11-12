@@ -1,0 +1,13 @@
+name: se-dev
+
+services:
+  web:
+    build:
+      target: dev
+    environment:
+      DJANGO_DEBUG: "true"
+    user: "${DEV_UID:-1000}:${DEV_GID:-1000}"
+    ports: ["${WEB_HOST_PORT}:${WEB_SERVICE_PORT}"]
+    volumes:
+      - ./src/se/entrypoints/web:/app
+    command: python manage.py runserver 0.0.0.0:${WEB_SERVICE_PORT} --noreload
