@@ -5,6 +5,9 @@ dumps/
 __pycache__/
 .mypy_cache/
 
+# Django
+*.sqlite3
+
 # Documentation
 *.drawio
 *.bkp
