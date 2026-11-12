@@ -7,8 +7,8 @@ LOG_TAIL     := 200
 
 DC := docker compose \
 	--env-file .envs/web \
-	-f compose.web.base.yml \
-	-f compose.web.dev.yml
+	-f compose/web.base.yml \
+	-f compose/web.dev.yml
 
 web-up:  # Build + start web container
 	$(DC) up -d --build

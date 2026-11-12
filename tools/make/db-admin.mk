@@ -10,9 +10,9 @@ DUMP_MODELS    := auth.user glossary
 DC := docker compose \
 	--env-file .envs/db \
 	--env-file .envs/db.admin \
-	-f compose.postgres.yml \
-	-f compose.db-admin.base.yml \
-	-f compose.db-admin.dev.yml
+	-f compose/postgres.yml \
+	-f compose/db.admin.base.yml \
+	-f compose/db.admin.dev.yml
 
 admin-up:  # Build + start admin and postgres (DB volume kept)
 	@mkdir -p dumps

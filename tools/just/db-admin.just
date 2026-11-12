@@ -9,9 +9,9 @@ DUMPS_PATH := "/app/dumps/"
 ADMIN_DC := "docker compose" + \
     " --env-file " + ROOT + ".envs/db" + \
     " --env-file " + ROOT + ".envs/db.admin" + \
-    " -f " + ROOT + "compose.postgres.yml" + \
-    " -f " + ROOT + "compose.db-admin.base.yml" + \
-    " -f " + ROOT + "compose.db-admin.dev.yml"
+    " -f " + ROOT + "compose/postgres.yml" + \
+    " -f " + ROOT + "compose/db.admin.base.yml" + \
+    " -f " + ROOT + "compose/db.admin.dev.yml"
 
 # Load dumps to database from ./dumps/{file}.json
 ld file:

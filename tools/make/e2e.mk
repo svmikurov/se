@@ -1,10 +1,10 @@
 E2E_COMPOSE := docker compose \
 	--env-file .envs/db \
 	--env-file .envs/db.admin \
-	-f compose.postgres.yml \
-	-f compose.db-admin.base.yml \
-	-f compose.db-admin.dev.yml \
-	-f compose.db-admin.e2e.yml
+	-f compose/postgres.yml \
+	-f compose/db.admin.base.yml \
+	-f compose/db.admin.dev.yml \
+	-f compose/db.admin.e2e.yml
 
 e2e:  # Run Playwright Python E2E tests (image with baked-in Playwright)
 	@mkdir -p test-results
