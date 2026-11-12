@@ -11,6 +11,9 @@ from . import models
 TRUNCATE_LENGTH = 40
 
 
+# Term
+
+
 @admin.register(models.Definition)
 class DefinitionAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
     list_display = (
@@ -89,14 +92,6 @@ class TermAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
         return timezone.localtime(obj.created_at).strftime('%Y-%m-%d')
 
 
-@admin.register(models.Author)
-class AuthorAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
-
-
-@admin.register(models.Source)
-class SourceAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
-
-
 @admin.register(models.TermLink)
 class TermLinkAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
     list_display = (
@@ -132,12 +127,23 @@ class TermLinkAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
         super().save_model(request, obj, form, change)
 
 
-# Tags
+# Source
+
+
+@admin.register(models.Source)
+class SourceAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
+
+
+@admin.register(models.Author)
+class AuthorAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
+
+
+# Tag
 
 
 @admin.register(models.Tag)
-class TagAdmin(admin.ModelAdmin): ...
+class TagAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
 
 
 @admin.register(models.DefinitionTag)
-class DefinitionTagAdmin(admin.ModelAdmin): ...
+class DefinitionTagAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
