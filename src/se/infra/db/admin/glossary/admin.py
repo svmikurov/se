@@ -142,7 +142,20 @@ class AuthorAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
 
 
 @admin.register(models.Tag)
-class TagAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
+class TagAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
+    list_display = ('name',)
+    exclude = ('user',)
+
+    def save_model(
+        self,
+        request: HttpRequest,
+        obj: Any,
+        form: Any,
+        change: bool,
+    ) -> None:
+        if not change and not obj.user_id:
+            obj.user = request.user
+        super().save_model(request, obj, form, change)
 
 
 @admin.register(models.DefinitionTag)
