@@ -1,12 +1,18 @@
-from typing import Any
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
 
 from django.contrib import admin
 from django.db.models import QuerySet
-from django.http import HttpRequest
 from django.template.defaultfilters import truncatechars
 from django.utils import timezone
 
 from . import models
+
+if TYPE_CHECKING:
+    from django.db.models import Model
+    from django.forms import Form
+    from django.http import HttpRequest
 
 TRUNCATE_LENGTH = 40
 
@@ -15,12 +21,12 @@ class SaveModelWithUserMixin:
     def save_model(
         self,
         request: HttpRequest,
-        obj: Any,
-        form: Any,
+        obj: Model,
+        form: Form,
         change: bool,
     ) -> None:
-        if not change and not obj.user_id:
-            obj.user = request.user
+        if not change and not obj.user_id:  # type: ignore[attr-defined]
+            obj.user = request.user  # type: ignore[attr-defined]
         super().save_model(request, obj, form, change)  # type: ignore[misc]
 
 
@@ -28,7 +34,7 @@ class SaveModelWithUserMixin:
 
 
 @admin.register(models.Definition)
-class DefinitionAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
+class DefinitionAdmin(SaveModelWithUserMixin, admin.ModelAdmin):  # type: ignore[type-arg]
     list_display = (
         'text',
         'abbreviation',
@@ -41,38 +47,16 @@ class DefinitionAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
     exclude = ('user',)
     readonly_fields = ('created_at', 'updated_at')
 
-    def save_model(
-        self,
-        request: HttpRequest,
-        obj: models.Definition,
-        form: Any,
-        change: bool,
-    ) -> None:
-        if not change and not obj.user_id:  # type: ignore[attr-defined]
-            obj.user = request.user
-        super().save_model(request, obj, form, change)
-
 
 @admin.register(models.Explanation)
-class ExplanationAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
+class ExplanationAdmin(SaveModelWithUserMixin, admin.ModelAdmin):  # type: ignore[type-arg]
     list_display = ('text', 'source', 'created_at')
     search_fields = ('text',)
     exclude = ('user',)
 
-    def save_model(
-        self,
-        request: HttpRequest,
-        obj: models.Explanation,
-        form: Any,
-        change: bool,
-    ) -> None:
-        if not change and not obj.user_id:  # type: ignore[attr-defined]
-            obj.user = request.user
-        super().save_model(request, obj, form, change)
-
 
 @admin.register(models.Term)
-class TermAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
+class TermAdmin(SaveModelWithUserMixin, admin.ModelAdmin):  # type: ignore[type-arg]
     list_display = (
         'definition',
         'explanation_short',
@@ -83,17 +67,6 @@ class TermAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
     autocomplete_fields = ('definition', 'explanation')
     exclude = ('user',)
     readonly_fields = ('created_at', 'updated_at')
-
-    def save_model(
-        self,
-        request: HttpRequest,
-        obj: models.Term,
-        form: Any,
-        change: bool,
-    ) -> None:
-        if not change and not obj.user_id:  # type: ignore[attr-defined]
-            obj.user = request.user
-        super().save_model(request, obj, form, change)
 
     @admin.display(description='Explanation')
     def explanation_short(self, obj: models.Term) -> str:
@@ -106,7 +79,7 @@ class TermAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
 
 
 @admin.register(models.TermLink)
-class TermLinkAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
+class TermLinkAdmin(SaveModelWithUserMixin, admin.ModelAdmin):  # type: ignore[type-arg]
     list_display = (
         'parent',
         'child',
@@ -128,17 +101,6 @@ class TermLinkAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
             .select_related('parent', 'child', 'user')
         )
 
-    def save_model(
-        self,
-        request: HttpRequest,
-        obj: models.TermLink,
-        form: Any,
-        change: bool,
-    ) -> None:
-        if not change and not obj.user_id:  # type: ignore[attr-defined]
-            obj.user = request.user
-        super().save_model(request, obj, form, change)
-
 
 # Quote
 
@@ -152,30 +114,21 @@ class QuoteAdmin(SaveModelWithUserMixin, admin.ModelAdmin):  # type: ignore[type
 
 
 @admin.register(models.Source)
-class SourceAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
+class SourceAdmin(SaveModelWithUserMixin, admin.ModelAdmin):  # type: ignore[type-arg]
+    exclude = ('user',)
 
 
 @admin.register(models.Author)
-class AuthorAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
+class AuthorAdmin(SaveModelWithUserMixin, admin.ModelAdmin):  # type: ignore[type-arg]
+    exclude = ('user',)
 
 
 # Scope
 
 
 @admin.register(models.Scope)
-class ScopeAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
+class ScopeAdmin(SaveModelWithUserMixin, admin.ModelAdmin):  # type: ignore[type-arg]
     exclude = ('user',)
-
-    def save_model(
-        self,
-        request: HttpRequest,
-        obj: Any,
-        form: Any,
-        change: bool,
-    ) -> None:
-        if not change and not obj.user_id:
-            obj.user = request.user
-        super().save_model(request, obj, form, change)
 
 
 @admin.register(models.DefinitionScope)
@@ -186,20 +139,9 @@ class DefinitionScopeAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
 
 
 @admin.register(models.Tag)
-class TagAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
+class TagAdmin(SaveModelWithUserMixin, admin.ModelAdmin):  # type: ignore[type-arg]
     list_display = ('name',)
     exclude = ('user',)
-
-    def save_model(
-        self,
-        request: HttpRequest,
-        obj: Any,
-        form: Any,
-        change: bool,
-    ) -> None:
-        if not change and not obj.user_id:
-            obj.user = request.user
-        super().save_model(request, obj, form, change)
 
 
 @admin.register(models.DefinitionTag)
