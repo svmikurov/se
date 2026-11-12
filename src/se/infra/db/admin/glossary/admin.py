@@ -11,6 +11,19 @@ from . import models
 TRUNCATE_LENGTH = 40
 
 
+class SaveModelWithUserMixin:
+    def save_model(
+        self,
+        request: HttpRequest,
+        obj: Any,
+        form: Any,
+        change: bool,
+    ) -> None:
+        if not change and not obj.user_id:
+            obj.user = request.user
+        super().save_model(request, obj, form, change)  # type: ignore[misc]
+
+
 # Term
 
 
@@ -125,6 +138,14 @@ class TermLinkAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
         if not change and not obj.user_id:  # type: ignore[attr-defined]
             obj.user = request.user
         super().save_model(request, obj, form, change)
+
+
+# Quote
+
+
+@admin.register(models.Quote)
+class QuoteAdmin(SaveModelWithUserMixin, admin.ModelAdmin):  # type: ignore[type-arg]
+    exclude = ('user',)
 
 
 # Source

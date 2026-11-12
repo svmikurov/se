@@ -5,6 +5,8 @@ __all__ = [
     'Definition',
     'Explanation',
     'Term',
+    # Quote
+    'Quote',
     # Source
     'Author',
     'Source',
@@ -17,6 +19,7 @@ __all__ = [
     'DefinitionTag',
 ]
 
+from .quote import Quote
 from .scope import DefinitionScope, Scope
 from .source import Author, Source
 from .tag import DefinitionTag, Tag
