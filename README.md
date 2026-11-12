@@ -16,6 +16,7 @@ Self-education project
 - Python ≥ 3.13
 - Poetry ≥ 2.0
 - just ≥ 1.0
+- **Git Bash ≥ 2.40** (Windows only)
 
 ## Workflow
 
