@@ -138,6 +138,29 @@ class SourceAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
 class AuthorAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
 
 
+# Scope
+
+
+@admin.register(models.Scope)
+class ScopeAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
+    exclude = ('user',)
+
+    def save_model(
+        self,
+        request: HttpRequest,
+        obj: Any,
+        form: Any,
+        change: bool,
+    ) -> None:
+        if not change and not obj.user_id:
+            obj.user = request.user
+        super().save_model(request, obj, form, change)
+
+
+@admin.register(models.DefinitionScope)
+class DefinitionScopeAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
+
+
 # Tag
 
 
