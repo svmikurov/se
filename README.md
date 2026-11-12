@@ -58,5 +58,8 @@ docs-docker-run:    # Run documentation server on http://localhost:$(DOCS_HOST_P
 ## Show available commands
 
 ```bash
-make help
+make help           # Show Makefile command help
+just help           # Show all just recipes
+
+just ld {file_name} # Load file_name.json data to database
 ```
