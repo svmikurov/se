@@ -2,34 +2,36 @@
 # WEB site commands (no database)
 # =============================================================================
 
-SERVICE_NAME := web
+WEB_SERVICE_NAME := web
 LOG_TAIL     := 200
 
-DC := docker compose \
+DC_WEB := docker compose \
+	--project-directory . \
 	--env-file .envs/web \
+	-f compose/networks.yml \
 	-f compose/web.base.yml \
 	-f compose/web.dev.yml
 
 web-up:  # Build + start web container
-	$(DC) up -d --build
+	$(DC_WEB) up -d --build
 
 web-stop:  # Stop web container (keeps it around)
-	$(DC) stop $(SERVICE_NAME)
+	$(DC_WEB) stop $(WEB_SERVICE_NAME)
 
 web-down:  # Down: stop/remove containers and network (no DB volumes in web)
-	$(DC) down
+	$(DC_WEB) down
 
 web-restart:  # Restart web process (picks up code from bind-mount; no compose/env/Dockerfile changes)
-	$(DC) restart $(SERVICE_NAME)
+	$(DC_WEB) restart $(WEB_SERVICE_NAME)
 
 web-recreate:  # Recreate web container: applies compose/env changes (no rebuild)
-	$(DC) up -d --force-recreate --no-deps $(SERVICE_NAME)
+	$(DC_WEB) up -d --force-recreate --no-deps $(WEB_SERVICE_NAME)
 
 web-rebuild:  # Rebuild + recreate web container: applies Dockerfile/deps changes
-	$(DC) up -d --build --force-recreate --no-deps $(SERVICE_NAME)
+	$(DC_WEB) up -d --build --force-recreate --no-deps $(WEB_SERVICE_NAME)
 
 web-logs:  # Follow web logs in real time
-	$(DC) logs -f --tail=$(LOG_TAIL) $(SERVICE_NAME)
+	$(DC_WEB) logs -f --tail=$(LOG_TAIL) $(WEB_SERVICE_NAME)
 
 # Help
 # ====

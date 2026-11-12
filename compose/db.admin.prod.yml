@@ -1,4 +1,4 @@
-name: se-prod
+name: se-db-prod
 
 services:
   admin:

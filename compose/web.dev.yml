@@ -1,4 +1,4 @@
-name: se-dev
+name: se-web-dev
 
 services:
   web:

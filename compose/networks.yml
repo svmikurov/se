@@ -1,0 +1,5 @@
+networks:
+  se-dev-net:
+    external: true
+  se-admin-internal:
+    internal: true

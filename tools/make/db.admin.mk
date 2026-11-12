@@ -2,69 +2,71 @@
 # Database administration commands
 # =============================================================================
 
-SERVICE_NAME   := admin
+ADMIN_SERVICE_NAME   := admin
 DATABASE_SERVICE := postgres
 LOG_TAIL       := 200
 DUMP_MODELS    := auth.user glossary
 
-DC := docker compose \
+DC_ADMIN := docker compose \
+	--project-directory . \
 	--env-file .envs/db \
 	--env-file .envs/db.admin \
+	-f compose/networks.yml \
 	-f compose/postgres.yml \
 	-f compose/db.admin.base.yml \
 	-f compose/db.admin.dev.yml
 
 admin-up:  # Build + start admin and postgres (DB volume kept)
 	@mkdir -p dumps
-	$(DC) up -d --build
+	$(DC_ADMIN) up -d --build
 
 admin-stop:  # Stop admin container (keeps it around)
-	$(DC) stop $(SERVICE_NAME)
+	$(DC_ADMIN) stop $(ADMIN_SERVICE_NAME)
 
 admin-down:  # Down: stop/remove containers and network; named DB volume KEPT
-	$(DC) down
+	$(DC_ADMIN) down
 
 admin-down-hard:  # DANGER: down + drop named DB volume (data LOST)
-	$(DC) down --volumes
+	$(DC_ADMIN) down --volumes
 
 admin-restart:  # Restart admin process (picks up code from bind-mount; no compose/env/Dockerfile changes)
-	$(DC) restart $(SERVICE_NAME)
+	$(DC_ADMIN) restart $(ADMIN_SERVICE_NAME)
 
 admin-recreate:  # Recreate admin container: applies compose/env changes (no rebuild)
-	$(DC) up -d --force-recreate --no-deps $(SERVICE_NAME)
+	$(DC_ADMIN) up -d --force-recreate --no-deps $(ADMIN_SERVICE_NAME)
 
 admin-rebuild:  # Rebuild + recreate admin: applies Dockerfile/deps changes
-	$(DC) up -d --build --force-recreate --no-deps $(SERVICE_NAME)
+	$(DC_ADMIN) up -d --build --force-recreate --no-deps $(ADMIN_SERVICE_NAME)
 
 admin-makemigrations:  # Generate new migrations from model changes (dev)
-	$(DC) exec $(SERVICE_NAME) python manage.py makemigrations
+	$(DC_ADMIN) exec $(ADMIN_SERVICE_NAME) python manage.py makemigrations
 
 admin-dry-run:  # Preview model changes -> migrations, without writing files
-	$(DC) exec $(SERVICE_NAME) python manage.py makemigrations --dry-run
+	$(DC_ADMIN) exec $(ADMIN_SERVICE_NAME) python manage.py makemigrations --dry-run
 
 admin-migrate:  # Apply Django migrations to the DB (dev)
-	$(DC) exec $(SERVICE_NAME) python manage.py migrate
+	$(DC_ADMIN) exec $(ADMIN_SERVICE_NAME) python manage.py migrate
 
 admin-migrate-plan:  # Show which migrations would be applied, without applying
-	$(DC) exec $(SERVICE_NAME) python manage.py migrate --plan
+	$(DC_ADMIN) exec $(ADMIN_SERVICE_NAME) python manage.py migrate --plan
 
 admin-showmigrations:  # List all migrations and their applied/unapplied state
-	$(DC) exec $(SERVICE_NAME) python manage.py showmigrations
+	$(DC_ADMIN) exec $(ADMIN_SERVICE_NAME) python manage.py showmigrations
 
 admin-su:  # Create Django superuser (interactive)
-	$(DC) exec $(SERVICE_NAME) python manage.py createsuperuser
+	$(DC_ADMIN) exec $(ADMIN_SERVICE_NAME) python manage.py createsuperuser
 
 admin-logs:  # Follow admin logs in real time
-	$(DC) logs -f --tail=$(LOG_TAIL) $(SERVICE_NAME)
+	$(DC_ADMIN) logs -f --tail=$(LOG_TAIL) $(ADMIN_SERVICE_NAME)
 
 admin-logs-db:  # Follow Postgres logs in real time
-	$(DC) logs -f --tail=$(LOG_TAIL) $(DATABASE_SERVICE)
+	$(DC_ADMIN) logs -f --tail=$(LOG_TAIL) $(DATABASE_SERVICE)
 
 admin-dumpdata:  # Dump DUMP_MODELS to dumps/dump-<timestamp>.json
 	@test -n "$(DUMP_MODELS)" || { echo "ERROR: DUMP_MODELS is empty"; exit 1; }
 	@mkdir -p dumps
 	@tmp=$$(mktemp dumps/.dump-XXXXXX.json); \
-	if $(DC) exec -T $(SERVICE_NAME) python manage.py dumpdata $(DUMP_MODELS) --indent 2 > $$tmp; then \
+	if $(DC_ADMIN) exec -T $(ADMIN_SERVICE_NAME) python manage.py dumpdata $(DUMP_MODELS) --indent 2 > $$tmp; then \
 		mv $$tmp dumps/dump-$$(date +%Y%m%d-%H%M%S).json; \
 		echo "dump written to dumps/"; \
 	else \

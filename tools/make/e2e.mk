@@ -1,6 +1,8 @@
 E2E_COMPOSE := docker compose \
+	--project-directory . \
 	--env-file .envs/db \
 	--env-file .envs/db.admin \
+	-f compose/networks.yml \
 	-f compose/postgres.yml \
 	-f compose/db.admin.base.yml \
 	-f compose/db.admin.dev.yml \

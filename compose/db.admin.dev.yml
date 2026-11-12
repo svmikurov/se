@@ -1,4 +1,4 @@
-name: se-dev
+name: se-db-dev
 
 services:
   admin:
@@ -11,4 +11,7 @@ services:
     volumes:
       - ./src/se/infra/db/admin:/app
       - ./dumps:/app/dumps
+    networks:
+      - se-dev-net
+      - se-admin-internal
     command: python manage.py runserver 0.0.0.0:${ADMIN_SERVICE_PORT} --noreload

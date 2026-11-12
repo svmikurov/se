@@ -14,6 +14,8 @@ services:
       context: .
       dockerfile: ./docker/e2e/Dockerfile
     working_dir: /tests
+    networks:
+      - se-dev-net
     volumes:
       - ./tests:/tests:ro              # тесты — read-only
       - ./test-results:/results        # отчёты — ВНЕ /tests, rw
