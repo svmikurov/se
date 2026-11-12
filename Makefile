@@ -7,6 +7,7 @@ include tools/make/docs.mk
 include tools/make/check.mk
 include tools/make/e2e.mk
 include tools/make/db-admin.mk
+include tools/make/web.mk
 
 COLUMN_WIDTH := 24
 HELP_FORMAT := %-$(COLUMN_WIDTH)s %s\n
