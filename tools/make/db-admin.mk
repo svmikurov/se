@@ -27,6 +27,15 @@ admin-down:  # Stop and remove containers and network (DB volume kept)
 admin-down-hard:  # DANGER: down + drop named volume postgres-data
 	$(DC) down --volumes
 
+admin-restart:   # Fast: reload code from bind-mount only (no compose/env/Dockerfile changes)
+	$(DC) restart $(SERVICE_NAME)
+
+admin-recreate:  # Recreate admin container: applies compose/env changes (no rebuild)
+	$(DC) up -d --force-recreate --no-deps $(SERVICE_NAME)
+
+admin-rebuild:   # Rebuild + recreate admin: applies Dockerfile/deps changes
+	$(DC) up -d --build --force-recreate --no-deps $(SERVICE_NAME)
+
 admin-migrate:  # Apply Django migrations (dev)
 	$(DC) exec $(SERVICE_NAME) python manage.py migrate
 
@@ -63,6 +72,10 @@ admin-help:
 	@printf "$(HELP_FORMAT)" "admin-stop"            "Stop admin container (keeps it around)"
 	@printf "$(HELP_FORMAT)" "admin-down"            "Stop and remove containers and network (DB volume kept)"
 	@printf "$(HELP_FORMAT)" "admin-down-hard"       "DANGER: down + drop named volume postgres-data"
+	@echo ""
+	@printf "$(HELP_FORMAT)" "admin-restart"       	 "Fast: reload code from bind-mount only (no compose/env/Dockerfile changes)"
+	@printf "$(HELP_FORMAT)" "admin-recreate"        "Recreate admin container: applies compose/env changes (no rebuild)"
+	@printf "$(HELP_FORMAT)" "admin-rebuild"       	 "Rebuild + recreate admin: applies Dockerfile/deps changes"
 	@echo ""
 	@printf "$(HELP_FORMAT)" "admin-migrate"         "Apply Django migrations (dev)"
 	@printf "$(HELP_FORMAT)" "admin-migrate-plan"    "Show migration plan without applying (dev)"
