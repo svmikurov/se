@@ -7,3 +7,4 @@ WSE documentation
 
    domain
    glossary
+   locale
