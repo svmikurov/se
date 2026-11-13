@@ -4,6 +4,7 @@ secrets/
 dumps/
 __pycache__/
 .mypy_cache/
+build/
 
 # Django
 *.sqlite3
