@@ -35,3 +35,63 @@ settings.py
        'django.middleware.locale.LocaleMiddleware',   # после SessionMiddleware, перед CommonMiddleware
        ...
    ]
+
+
+urls.py
+=======
+
+.. code-block:: python
+
+   from django.conf.urls.i18n import i18n_patterns
+   from django.contrib import admin
+   from django.urls import include, path
+
+   urlpatterns = [
+       path('i18n/', include('django.conf.urls.i18n')),  # set_language view
+   ]
+
+   urlpatterns += i18n_patterns(
+       path('admin/', admin.site.urls),
+       path('glossary/', include('glossary.urls'), name='glossary'),
+       prefix_default_language=True,   # /en/ and /ru/ (else False — / and /ru/))
+   )
+
+
+code.py
+=======
+
+.. code-block:: python
+
+
+   from django.utils.translation import gettext as _
+   from django.utils.translation import gettext_lazy as _lazy
+
+   # In functions/views — gettext
+   def my_view(request):
+       message = _("Hello, world")
+       return HttpResponse(message)
+
+   # In models/forms/settings — gettext_lazy
+   class Tag(models.Model):
+       name = models.CharField(
+           max_length=70,
+           verbose_name=_lazy('Name'),
+       )
+
+
+templates
+=========
+
+.. code-block::
+
+   {% load i18n %}
+
+   <h1>{% translate "Glossary" %}</h1>
+
+
+Install gettext
+===============
+
+
+Генерация .po-файлов
+====================
