@@ -33,6 +33,13 @@ web-rebuild:  # Rebuild + recreate web container: applies Dockerfile/deps change
 web-logs:  # Follow web logs in real time
 	$(DC_WEB) logs -f --tail=$(LOG_TAIL) $(WEB_SERVICE_NAME)
 
+web-makemessages:
+	$(DC_WEB) exec $(WEB_SERVICE_NAME) django-admin makemessages -l ru -l en
+
+web-compilemessages:
+	$(DC_WEB) exec $(WEB_SERVICE_NAME) django-admin compilemessages
+
+
 # Help
 # ====
 
