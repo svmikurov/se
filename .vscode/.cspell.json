@@ -21,13 +21,20 @@
       "psycopg",
       "dotenv",
       "testpaths",
-      // Docker & Commands
-      "runserver",
-      "noreload",
+      // Docker
       "healthcheck",
       "isready",
+      // Django
+      "runserver",
+      "noreload",
       "makemigrations",
       "dumpdata",
+      "urlpatterns",
+      "blocktranslate",
+      "endblocktranslate",
+      "endfor",
+      "makemessages",
+      "compilemessages",
     ],
     "ignorePaths": [
         "**/node_modules/**",
