@@ -31,15 +31,28 @@ make environments   # Add environments example
 make secrets        # Add secrets example
 ```
 
+#### Add networks
+
+```bash
+make network-create # Create networks
+```
+
 #### Database administration
 
 ```bash
-make admin-up       # Start container for below
+make admin-up       # Start service on http://127.0.0.1:$(ADMIN_HOST_PORT)
 make admin-migrate  # Apply migrations
 make admin-su       # Create superuser
 ```
 
-Service URL: http://127.0.0.1:8100/admin/
+For example DB administration URL: http://127.0.0.1:8100/admin/
+
+#### Start services
+
+```bash
+make web-up         # Start web entrypoint on http://127.0.0.1:$(WEB_HOST_PORT)
+```
+For example WEB URL: http://127.0.0.1:8200
 
 #### Add dependencies for development
 

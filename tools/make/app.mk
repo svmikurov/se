@@ -4,6 +4,7 @@
 
 -include .envs/db.secrets
 -include .envs/db.admin.secrets
+-include .envs/web.secrets
 
 environments:  # Generate environment examples: ./envs/* from .envs.example/*
 	cp -r .envs.example/. .envs/
@@ -12,9 +13,11 @@ environments:  # Generate environment examples: ./envs/* from .envs.example/*
 secrets:  # Generate secret examples: ./secrets/* from .envs/*.secrets
 	@mkdir -p secrets
 	@umask 077 && printf '%s\n' "$(DATABASE_PASSWORD)" > secrets/database_password
-	@umask 077 && printf '%s\n' "$(DJANGO_SECRET)" > secrets/django_secret_key
+	@umask 077 && printf '%s\n' "$(ADMIN_DJANGO_SECRET)" > secrets/admin_secret_key
+	@umask 077 && printf '%s\n' "$(WEB_DJANGO_SECRET)" > secrets/web_secret_key
 	@chmod 600 secrets/database_password
-	@chmod 600 secrets/django_secret_key
+	@chmod 600 secrets/admin_secret_key
+	@chmod 600 secrets/web_secret_key
 
 .PHONY: setup
 setup: ## Install project with dependencies
