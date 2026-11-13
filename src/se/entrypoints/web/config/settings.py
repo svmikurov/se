@@ -2,6 +2,7 @@
 
 from pathlib import Path
 
+from django.utils.translation import gettext_lazy as _
 from se_tools import env, env_bool  # type: ignore[import-untyped]
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,6 +33,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -92,18 +94,24 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.1/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
-
 LANGUAGES = [
-    ('en', 'English'),
-    ('ru', 'Русский'),
+    ('en', _('English')),
+    ('ru', _('Russian')),
 ]
 
-TIME_ZONE = 'Asia/Yekaterinburg'
+LANGUAGE_CODE = 'ru'
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
+
+TIME_ZONE = 'Asia/Yekaterinburg'
 
 
 # Static files (CSS, JavaScript, Images)
