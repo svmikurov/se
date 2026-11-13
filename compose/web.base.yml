@@ -2,7 +2,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: ./docker/db/admin/Dockerfile
+      dockerfile: ./docker/web/Dockerfile
     environment:
       DJANGO_SECRET_KEY_FILE: /run/secrets/web_secret_key
     secrets:
