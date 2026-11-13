@@ -34,7 +34,7 @@ make secrets        # Add secrets example
 #### Add networks
 
 ```bash
-make network-create # Create networks
+make net-create     # Create networks
 ```
 
 #### Database administration
@@ -63,11 +63,11 @@ make setup          # Install project with development dependencies
 #### Project documentation
 
 ```bash
-docs-docker-build:  # Build documentation image
-docs-docker-run:    # Run documentation server on http://localhost:$(DOCS_HOST_PORT)
+make docs-docker-build  # Build documentation image
+make docs-docker-run    # Run documentation server on http://127.0.0.1:$(DOCS_HOST_PORT)
 ```
 
-`DOCS_HOST_PORT` is defined in `.envs/docs` file
+For example documentation URL: http://127.0.0.1:8300
 
 ## Show available commands
 
