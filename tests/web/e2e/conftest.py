@@ -13,7 +13,7 @@ def pytest_configure(config: dict[str, Any]) -> None:
 
 @pytest.fixture(scope='session')
 def base_url() -> str:
-    return os.environ.get('BASE_URL', 'http://admin:8100')
+    return os.environ.get('BASE_URL', 'http://web:8200')
 
 
 @pytest.fixture(scope='session')

@@ -6,16 +6,11 @@ ENV PYTHONUNBUFFERED=1 \
 
 WORKDIR /tests
 
-# 1) Python-зависимости
-COPY tests/requirements.txt /tests/requirements.txt
+COPY docker/e2e/requirements.txt /tests/requirements.txt
 RUN pip install --no-cache-dir -r /tests/requirements.txt
 
-# 2) Браузеры Playwright + системные зависимости (один раз, в слое образа)
 RUN playwright install --with-deps chromium
 
-# 3) Тесты копируются в образ (для CI/прод-подобного запуска);
-#    для локальной разработки они монтируются томом (см. compose ниже)
-COPY tests/ /tests/
+COPY tests/web/e2e/ /tests/
 
-# По умолчанию — прогнать все тесты
 CMD ["pytest", "-v"]
