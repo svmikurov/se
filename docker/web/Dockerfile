@@ -10,7 +10,6 @@ WORKDIR /build
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
     git \
-    gettext \
  && rm -rf /var/lib/apt/lists/*
 
 COPY docker/web/requirements.txt /temp/requirements.txt
@@ -26,6 +25,11 @@ FROM python:3.13-slim AS base
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONPATH=/app
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+    gettext \
+ && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
