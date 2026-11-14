@@ -37,7 +37,7 @@ FROM base AS dev
 
 FROM base AS prod
 
-COPY src/se/infra/db/admin /app
+COPY src/se/infrastructure/db/admin /app
 
 RUN useradd -r -u 10001 -g nogroup appuser \
  && chown -R appuser:nogroup /app

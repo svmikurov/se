@@ -9,7 +9,7 @@ services:
     user: "${DEV_UID:-1000}:${DEV_GID:-1000}"
     ports: ["${ADMIN_HOST_PORT}:${ADMIN_SERVICE_PORT}"]
     volumes:
-      - ./src/se/infra/db/admin:/app
+      - ./src/se/infrastructure/db/admin:/app
       - ./dumps:/app/dumps
     networks:
       - se-dev-net
