@@ -9,6 +9,9 @@ build/
 # Django
 *.sqlite3
 
+# Localization
+*.mo
+
 # Documentation
 *.drawio
 *.bkp
