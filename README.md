@@ -52,7 +52,7 @@ For example DB administration URL: http://127.0.0.1:8100/admin/
 ```bash
 make web-up         # Start web entrypoint on http://127.0.0.1:$(WEB_HOST_PORT)
 ```
-For example WEB URL: http://127.0.0.1:8200
+For example WEB URL: http://127.0.0.1:8200/ru/glossary/
 
 #### Add dependencies for development
 
@@ -60,11 +60,17 @@ For example WEB URL: http://127.0.0.1:8200
 make setup          # Install project with development dependencies
 ```
 
+#### Run e2e tests
+
+```bash
+make e2e            # Up admin+postgres (keep running) + run e2e
+```
+
 #### Project documentation
 
 ```bash
-make docs-docker-build  # Build documentation image
-make docs-docker-run    # Run documentation server on http://127.0.0.1:$(DOCS_HOST_PORT)
+make docs-build     # Build documentation image
+make docs-run       # Run documentation server on http://127.0.0.1:$(DOCS_HOST_PORT)
 ```
 
 For example documentation URL: http://127.0.0.1:8300
