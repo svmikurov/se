@@ -54,6 +54,13 @@ make web-up         # Start web entrypoint on http://127.0.0.1:$(WEB_HOST_PORT)
 ```
 For example WEB URL: http://127.0.0.1:8200/ru/glossary/
 
+##### Localize
+
+```bash
+make web-compilemessages    # Compile .po files to .mo
+make web-restart            # Restart web process
+```
+
 #### Add dependencies for development
 
 ```bash
