@@ -89,9 +89,11 @@ templates
    <h1>{% translate "Glossary" %}</h1>
 
 
-Install gettext
-===============
-
-
 Генерация .po-файлов
 ====================
+
+.. code-block:: bash
+
+   make web-makemessages
+   make web-compilemessages
+   make web-restart
