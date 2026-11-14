@@ -4,13 +4,13 @@
 
 EXTERNAL_NETWORK := se-dev-net
 
-net-create:  # Create external network
+net-create:  ## Create external network
 	docker network create $(EXTERNAL_NETWORK)
 
-net-ls:  # Show networks
+net-ls:  ## Show networks
 	docker network ls
 
-net-rm:  # Remove network
+net-rm:  ## Remove network
 	docker network rm $(EXTERNAL_NETWORK)
 
 # -----------------------------------------------------------------------------

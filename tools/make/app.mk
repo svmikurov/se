@@ -6,11 +6,11 @@
 -include .envs/db.admin.secrets
 -include .envs/web.secrets
 
-environments:  # Generate environment examples: ./envs/* from .envs.example/*
+environments:  ## Generate environment examples: ./envs/* from .envs.example/*
 	cp -r .envs.example/. .envs/
 
 .PHONY: secrets
-secrets:  # Generate secret examples: ./secrets/* from .envs/*.secrets
+secrets:  ## Generate secret examples: ./secrets/* from .envs/*.secrets
 	@mkdir -p secrets
 	@umask 077 && printf '%s\n' "$(DATABASE_PASSWORD)" > secrets/database_password
 	@umask 077 && printf '%s\n' "$(ADMIN_DJANGO_SECRET)" > secrets/admin_secret_key

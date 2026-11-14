@@ -12,18 +12,18 @@ E2E_COMPOSE := docker compose \
 	-f compose/db.admin.dev.yml \
 	-f compose/db.admin.e2e.yml
 
-e2e:  # Up admin+postgres (keep running) + run e2e (returns pytest exit code)
+e2e:  ## Up admin+postgres (keep running) + run e2e (returns pytest exit code)
 	@mkdir -p test-results
 	$(E2E_COMPOSE) up -d --build admin postgres
 	$(E2E_COMPOSE) run --rm --build e2e
 
-e2e-down:  # Stop admin+postgres+e2e (DB volume kept)
+e2e-down:  ## Stop admin+postgres+e2e (DB volume kept)
 	$(E2E_COMPOSE) down
 
-e2e-build:  # Rebuild e2e image only (after requirements.txt/Dockerfile changes)
+e2e-build:  ## Rebuild e2e image only (after requirements.txt/Dockerfile changes)
 	$(E2E_COMPOSE) build e2e
 
-e2e-logs:  # Follow e2e logs
+e2e-logs:  ## Follow e2e logs
 	$(E2E_COMPOSE) logs -f --tail=$(LOG_TAIL) e2e
 
 # Help
