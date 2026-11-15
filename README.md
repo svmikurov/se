@@ -70,7 +70,7 @@ make setup          # Install project with development dependencies
 #### Run e2e tests
 
 ```bash
-make e2e            # Up admin+postgres (keep running) + run e2e
+make web-e2e        # Run Playwright E2E against web (web must be running)
 ```
 
 #### Project documentation
@@ -87,6 +87,4 @@ For example documentation URL: http://127.0.0.1:8300
 ```bash
 make help           # Show Makefile command help
 just help           # Show all just recipes
-
-just ld {file_name} # Load file_name.json data to database
 ```
