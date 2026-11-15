@@ -27,6 +27,14 @@ class PresentationPage(BasePage):
     path = '/glossary/presentation/'
     title = 'Презентация'
 
+    def __init__(self, page: Page) -> None:
+        super().__init__(page)
+        self._set_locators()
+
+    def _set_locators(self) -> None:
+        self.question_text = self.page.get_by_test_id('question-text')
+        self.answer_text = self.page.get_by_test_id('answer-text')
+
 
 @pytest.mark.e2e
 class TestGlossaryAppPage:
@@ -35,7 +43,16 @@ class TestGlossaryAppPage:
         page_obj.navigate(base_url)
         expect(page).to_have_title(page_obj.title)
 
-    def test_presentation_has_title(self, page: Page, base_url: str) -> None:
+
+@pytest.mark.e2e
+class TestGlossaryPresentationPage:
+    def test_page_has_title(self, page: Page, base_url: str) -> None:
         page_obj = PresentationPage(page)
         page_obj.navigate(base_url)
         expect(page).to_have_title(page_obj.title)
+
+    def test_page_shows_definition(self, page: Page, base_url: str) -> None:
+        page_obj = PresentationPage(page)
+        page_obj.navigate(base_url)
+        expect(page_obj.question_text).to_be_visible()
+        expect(page_obj.answer_text).to_be_visible()
