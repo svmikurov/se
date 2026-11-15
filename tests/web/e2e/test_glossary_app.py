@@ -23,8 +23,19 @@ class GlossaryPage(BasePage):
     title = 'Глоссарий'
 
 
+class PresentationPage(BasePage):
+    path = '/glossary/presentation/'
+    title = 'Презентация'
+
+
 @pytest.mark.e2e
-def test_that_glossary_index_page_has_title(page: Page, base_url: str) -> None:
-    page_obj = GlossaryPage(page)
-    page_obj.navigate(base_url)
-    expect(page).to_have_title(page_obj.title)
+class TestGlossaryAppPage:
+    def test_index_has_title(self, page: Page, base_url: str) -> None:
+        page_obj = GlossaryPage(page)
+        page_obj.navigate(base_url)
+        expect(page).to_have_title(page_obj.title)
+
+    def test_presentation_has_title(self, page: Page, base_url: str) -> None:
+        page_obj = PresentationPage(page)
+        page_obj.navigate(base_url)
+        expect(page).to_have_title(page_obj.title)
