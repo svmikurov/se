@@ -1,5 +1,6 @@
-WSE documentation
-=================
+================
+SE documentation
+================
 
 .. toctree::
    :maxdepth: 2
