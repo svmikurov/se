@@ -7,7 +7,7 @@ services:
     networks:
       - se-dev-net
     volumes:
-      - ./tests:/tests:ro
+      - ./tests/web/e2e:/tests:ro
       - ./test-results:/results
     environment:
       BASE_URL: http://web:${WEB_SERVICE_PORT}
