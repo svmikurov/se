@@ -11,3 +11,8 @@
 - **[>] shows next term definition**
 - [] shows next term explanation
 - [] shows term explanation with timeout
+- [] replace definition and explanation constants with variables
+
+## Request handler unit test
+
+- []
