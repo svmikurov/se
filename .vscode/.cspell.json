@@ -18,6 +18,7 @@
       "isort",
       "mccabe",
       "pytest",
+      "pytestmark",
       "psycopg",
       "dotenv",
       "testpaths",

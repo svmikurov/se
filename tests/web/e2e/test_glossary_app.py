@@ -3,6 +3,8 @@ from urllib.parse import urljoin
 import pytest
 from playwright.sync_api import Page, Response, expect
 
+pytestmark = pytest.mark.e2e
+
 
 class BasePage:
     path: str = ''
@@ -36,22 +38,20 @@ class PresentationPage(BasePage):
         self.answer_text = self.page.get_by_test_id('answer-text')
 
 
-@pytest.mark.e2e
-class TestGlossaryAppPage:
-    def test_index_has_title(self, page: Page, base_url: str) -> None:
+class TestGlossaryIndexPage:
+    def test_has_title(self, page: Page, base_url: str) -> None:
         page_obj = GlossaryPage(page)
         page_obj.navigate(base_url)
         expect(page).to_have_title(page_obj.title)
 
 
-@pytest.mark.e2e
 class TestGlossaryPresentationPage:
-    def test_page_has_title(self, page: Page, base_url: str) -> None:
+    def test_has_title(self, page: Page, base_url: str) -> None:
         page_obj = PresentationPage(page)
         page_obj.navigate(base_url)
         expect(page).to_have_title(page_obj.title)
 
-    def test_page_shows_definition(self, page: Page, base_url: str) -> None:
+    def test_shows_card(self, page: Page, base_url: str) -> None:
         page_obj = PresentationPage(page)
         page_obj.navigate(base_url)
         expect(page_obj.question_text).to_be_visible()
