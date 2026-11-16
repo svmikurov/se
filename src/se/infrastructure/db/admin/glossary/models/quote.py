@@ -2,7 +2,7 @@ from django.db import models
 from django.template.defaultfilters import truncatechars
 from django.utils.translation import gettext as _
 
-from .base import AbstractUserOwnedModel
+from .base import AbstractUserOwnedModel, TimestampedMixin
 
 
 class Quote(AbstractUserOwnedModel):
@@ -26,3 +26,22 @@ class Quote(AbstractUserOwnedModel):
 
     def __str__(self) -> str:
         return truncatechars(self.text, self.STR_MAX_LENGTH)
+
+
+class DefinitionQuote(TimestampedMixin):
+    definition = models.ForeignKey(
+        'Definition',
+        on_delete=models.PROTECT,
+    )
+    quote = models.ForeignKey(
+        Quote,
+        on_delete=models.PROTECT,
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['definition', 'quote'],
+                name='%(app_label)s_%(class)s_definition_quote_uniq',
+            )
+        ]

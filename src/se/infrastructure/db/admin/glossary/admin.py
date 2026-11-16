@@ -116,6 +116,12 @@ class QuoteAdmin(SaveModelWithUserMixin, ShowShortTextMixin, admin.ModelAdmin): 
     exclude = ('user',)
 
 
+@admin.register(models.DefinitionQuote)
+class DefinitionQuoteAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
+    list_display = ['definition', 'quote']
+    autocomplete_fields = ('definition',)
+
+
 # Source
 
 
@@ -138,7 +144,8 @@ class ScopeAdmin(SaveModelWithUserMixin, admin.ModelAdmin):  # type: ignore[type
 
 
 @admin.register(models.DefinitionScope)
-class DefinitionScopeAdmin(admin.ModelAdmin): ...  # type: ignore[type-arg]
+class DefinitionScopeAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
+    autocomplete_fields = ('definition',)
 
 
 # Tag
