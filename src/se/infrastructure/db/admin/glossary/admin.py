@@ -30,6 +30,11 @@ class SaveModelWithUserMixin:
         super().save_model(request, obj, form, change)  # type: ignore[misc]
 
 
+class ShowShortTextMixin:
+    def short_text(self, obj: Model) -> str:
+        return truncatechars(obj.text, TRUNCATE_LENGTH)  # type: ignore[attr-defined]
+
+
 # Term
 
 
@@ -106,7 +111,8 @@ class TermLinkAdmin(SaveModelWithUserMixin, admin.ModelAdmin):  # type: ignore[t
 
 
 @admin.register(models.Quote)
-class QuoteAdmin(SaveModelWithUserMixin, admin.ModelAdmin):  # type: ignore[type-arg]
+class QuoteAdmin(SaveModelWithUserMixin, ShowShortTextMixin, admin.ModelAdmin):  # type: ignore[type-arg]
+    list_display = ['short_text', 'source']
     exclude = ('user',)
 
 
