@@ -10,6 +10,7 @@ COPY docs/source /docs/source
 RUN sphinx-build /docs/source /docs/build/html
 
 COPY --chmod=0755 docker/docs/entrypoint.sh /entrypoint.sh
+RUN sed -i 's/\r$//' /entrypoint.sh && chmod +x /entrypoint.sh
 
 EXPOSE 8000
 ENTRYPOINT ["/entrypoint.sh"]
