@@ -17,11 +17,15 @@
       "pydocstyle",
       "isort",
       "mccabe",
-      "pytest",
-      "pytestmark",
       "psycopg",
       "dotenv",
+      // Pytest
+      "pytest",
+      "pytestmark",
+      "addopts",
       "testpaths",
+      // Sphinx
+      "toctree",
       // Docker
       "healthcheck",
       "isready",
