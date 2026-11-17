@@ -145,6 +145,7 @@ class ScopeAdmin(SaveModelWithUserMixin, admin.ModelAdmin):  # type: ignore[type
 
 @admin.register(models.DefinitionScope)
 class DefinitionScopeAdmin(admin.ModelAdmin):  # type: ignore[type-arg]
+    list_display = ('scope', 'definition', 'definition__translation')
     autocomplete_fields = ('definition',)
 
 
