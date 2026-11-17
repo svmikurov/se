@@ -22,26 +22,29 @@ Self-education project
 ## Structure
 
 ```bash
+.envs/      # Project environments
 compose/    # Docker compose files
 docker/     # Dockerfiles
-docs/       # Project documentation
-src/        # Code source
+docs/
+src/
   se/
-    domain/         # Project domain layer
-    entrypoints/    # Project entrypoint layer
+    domain/
+    entrypoints/
       web/            # WEB Backend for frontend
         config/         # Django framework configuration
         handlers/       # Request handlers (BFF component)
         locale/         # Site localization
         ...             # Django applications, templates: Glossary, Foreign, ...
-    infrastructure/ # Project infrastructure layer
-      db/             # Database infrastructure
-      http/           # HTTP clients
+    infrastructure/
+      db/
+        admin/          # Database administration via Django ORM
+      http/           # HTTP client
       api_clients/    # Services API clients
-tests/      # Tests
+tests/
   web/        # WEB BFF tests
     e2e/        # Playwright (browser, DOM) tests
-    unit/       # Unit tests
+    unit/
+    ...         # Test tools: fakes, fixtures
 tools/
   just/     # Just recipes
   make/     # Makefile commands
