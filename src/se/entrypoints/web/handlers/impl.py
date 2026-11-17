@@ -1,17 +1,16 @@
 """Request handler."""
 
-from dataclasses import dataclass
-
-
-@dataclass
-class PresentationCard:
-    definition: str
-    explanation: str
+from se.infrastructure.api_clients.protocols import PresentationApiProto
+from se.infrastructure.api_clients.schemas import PresentationCard
 
 
 class RequestHandler:
+    def __init__(
+        self,
+        client_api: PresentationApiProto[PresentationCard],
+    ) -> None:
+        self._client = client_api
+
     def handle(self) -> PresentationCard:
-        return PresentationCard(
-            definition='Definition text',
-            explanation='Explanation text',
-        )
+        card = self._client.get_card()
+        return card

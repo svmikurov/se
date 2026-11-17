@@ -2,6 +2,6 @@
 
 __all__ = [
     'RequestHandler',
-    'PresentationCard',
 ]
-from .impl import PresentationCard, RequestHandler
+
+from .impl import RequestHandler
