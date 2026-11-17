@@ -18,6 +18,31 @@ Self-education project
 - just ≥ 1.0
 - **Git Bash ≥ 2.40** (Windows only)
 
+## Structure
+
+```bash
+compose/    # Docker compose files
+docker/     # Dockerfiles
+docs/       # Project documentation
+src/        # Code source
+  se/
+    domain/         # Project domain layer
+    entrypoints/    # Project entrypoint layer
+      web/            # WEB Backend for frontend
+        handlers/       # Request handlers (BFF component)
+    infrastructure/ # Project infrastructure layer
+      db/             # Database infrastructure
+      http/           # HTTP clients
+      api_clients/    # Services API clients
+tests/      # Tests
+  web/        # WEB BFF tests
+    e2e/        # Playwright (browser, DOM) tests
+    unit/       # Unit tests
+tools/
+  just/     # Just recipes
+  make/     # Makefile commands
+```
+
 ## Workflow
 
 ### Development mode
