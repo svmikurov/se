@@ -6,13 +6,13 @@ from se.entrypoints.web.handlers import PresentationRequestHandler
 from se.infrastructure.api_clients import PresentationApi
 from se.infrastructure.http_clients import HttpClientProto
 
+from ..fakes import FakeHttpClient
 from ..fixtures.payload import PRESENTATION_CARD
-from ..stubs.impl import HttpClientStub
 
 
 @pytest.fixture
 def http_client() -> HttpClientProto:
-    return HttpClientStub()
+    return FakeHttpClient()
 
 
 @pytest.fixture
