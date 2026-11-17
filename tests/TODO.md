@@ -15,4 +15,4 @@
 
 ## Request handler unit test
 
-- **[>] handler returns presentation card**
+- [x] handler returns presentation card data
