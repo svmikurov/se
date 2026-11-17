@@ -9,6 +9,7 @@ Self-education project
 - Docker Engine ≥ 24.0
 - Docker Compose ≥ 2.20
 - Linux (x86_64/arm64)
+- Windows 10/11 (x86_64) с WSL2 + Docker Desktop ≥ 4.30
 - GNU Make ≥ 4.3
 
 ### Development (additional)
@@ -29,7 +30,10 @@ src/        # Code source
     domain/         # Project domain layer
     entrypoints/    # Project entrypoint layer
       web/            # WEB Backend for frontend
+        config/         # Django framework configuration
         handlers/       # Request handlers (BFF component)
+        locale/         # Site localization
+        ...             # Django applications, templates: Glossary, Foreign, ...
     infrastructure/ # Project infrastructure layer
       db/             # Database infrastructure
       http/           # HTTP clients
