@@ -2,7 +2,7 @@
 
 import pytest
 
-from se.entrypoints.web.handlers import RequestHandler
+from se.entrypoints.web.handlers import PresentationRequestHandler
 from se.infrastructure.api_clients import PresentationApi
 from se.infrastructure.http_clients import HttpClientProto
 
@@ -21,15 +21,15 @@ def presentation_api(http_client: HttpClientProto) -> PresentationApi:
 
 
 @pytest.fixture
-def handler(presentation_api: PresentationApi) -> RequestHandler:
-    return RequestHandler(client_api=presentation_api)
+def handler(presentation_api: PresentationApi) -> PresentationRequestHandler:
+    return PresentationRequestHandler(client_api=presentation_api)
 
 
-def test_handler_returns_definition(handler: RequestHandler) -> None:
+def test_handler_returns_definition(handler: PresentationRequestHandler) -> None:
     card = handler.handle()
     assert card.definition == PRESENTATION_CARD['definition']
 
 
-def test_handler_returns_explanation(handler: RequestHandler) -> None:
+def test_handler_returns_explanation(handler: PresentationRequestHandler) -> None:
     card = handler.handle()
     assert card.explanation == PRESENTATION_CARD['explanation']

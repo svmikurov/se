@@ -4,7 +4,7 @@ from se.infrastructure.api_clients.protocols import PresentationApiProto
 from se.infrastructure.api_clients.schemas import PresentationCard
 
 
-class RequestHandler:
+class PresentationRequestHandler:
     def __init__(
         self,
         client_api: PresentationApiProto[PresentationCard],

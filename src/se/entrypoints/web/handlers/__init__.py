@@ -1,7 +1,7 @@
 """Request handlers."""
 
 __all__ = [
-    'RequestHandler',
+    'PresentationRequestHandler',
 ]
 
-from .impl import RequestHandler
+from .impl import PresentationRequestHandler
