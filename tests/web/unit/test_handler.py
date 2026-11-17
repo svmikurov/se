@@ -1,6 +1,6 @@
 """Request handler tests."""
 
-from se.entrypoints.web.handlers import RequestHandler
+from se.entrypoints.handlers import RequestHandler
 
 
 def test_handler_returns_card() -> None:
