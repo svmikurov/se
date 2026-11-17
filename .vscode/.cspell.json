@@ -19,6 +19,7 @@
       "mccabe",
       "psycopg",
       "dotenv",
+      "httpx",
       // Pytest
       "pytest",
       "pytestmark",
