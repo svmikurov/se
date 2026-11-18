@@ -25,15 +25,7 @@ def handler(presentation_api: PresentationApi) -> PresentationRequestHandler:
     return PresentationRequestHandler(client_api=presentation_api)
 
 
-def test_handler_returns_definition(
-    handler: PresentationRequestHandler,
-) -> None:
+def test_handler_returns_card(handler: PresentationRequestHandler) -> None:
     card = handler.handle()
     assert card.definition == PRESENTATION_CARD['definition']
-
-
-def test_handler_returns_explanation(
-    handler: PresentationRequestHandler,
-) -> None:
-    card = handler.handle()
     assert card.explanation == PRESENTATION_CARD['explanation']
