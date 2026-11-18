@@ -1,12 +1,10 @@
-# Glossary application presentation test task list
+# Test list
 
-- [x] completed task
-- [ ] _**> current task**_
-- [ ] planned task
+## WEB BFF
 
-## e2e
+### e2e
 
-### open `/ru/glossary/`
+#### open `/ru/glossary/`
 - [x] returns `200`, title "Glossary"
 - [x] shows term definition
 - [x] shows term explanation
@@ -15,7 +13,9 @@
 - [ ] shows term explanation with timeout
 - [ ] replace definition and explanation constants with variables
 
-## Request handler unit test
+### Unit
+
+#### Request handler
 - [x] handler returns presentation card data
 
 ## Exercise Service
@@ -26,5 +26,5 @@
 - [ ] GET `/presentation/` returns `500` on internal error
 
 ### UseCase
-- [ ] handle() returns presentation card data
-- [ ] handle() raises NotFound for unknown
+- [ ] `handle()` returns presentation card data
+- [ ] `handle()` raises `NotFound` for unknown

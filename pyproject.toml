@@ -12,6 +12,7 @@ dependencies = [
     "se-tools @ git+https://github.com/svmikurov/se-tools.git@v0.1.0",
     "psycopg[binary] (>=3.3.6,<4.0.0)",
     "httpx (>=0.28.1,<0.29.0)",
+    "fastapi[standard] (>=0.164.0,<0.165.0)",
 ]
 
 [dependency-groups]

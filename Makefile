@@ -9,6 +9,7 @@ include tools/make/net.mk
 include tools/make/db.admin.mk
 include tools/make/web.mk
 include tools/make/web.e2e.mk
+include tools/make/presentation.mk
 
 COLUMN_WIDTH := 24
 HELP_FORMAT  := %-$(COLUMN_WIDTH)s %s\n

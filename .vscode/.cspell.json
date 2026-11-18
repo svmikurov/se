@@ -20,6 +20,7 @@
       "psycopg",
       "dotenv",
       "httpx",
+      "fastapi",
       // Pytest
       "pytest",
       "pytestmark",
