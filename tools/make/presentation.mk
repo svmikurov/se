@@ -12,7 +12,7 @@ presentation-build: ## Build service image
 presentation-run:  ## Run service server on http://localhost:$(PRESENTATION_SERVICE_NAME)
 	@echo "Running Presentation service image..."
 	-@docker rm -f $(PRESENTATION_SERVICE_NAME)
-	docker run --rm -d \
+	docker run --rm \
 		-p $(PRESENTATION_HOST_PORT):$(PRESENTATION_SERVICE_PORT) \
 		--name $(PRESENTATION_SERVICE_NAME) $(PRESENTATION_SERVICE_NAME) 
 	@echo "🌐 Container started. Service: http://localhost:$(PRESENTATION_HOST_PORT)"
@@ -20,6 +20,8 @@ presentation-run:  ## Run service server on http://localhost:$(PRESENTATION_SERV
 presentation-stop: ## Stop service server
 	-docker stop $(DOCS_SERVICE_NAME)
 
+presentation-logs:
+	docker logs $(PRESENTATION_SERVICE_NAME)
 
 # Help
 # ====

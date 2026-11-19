@@ -25,10 +25,11 @@ WORKDIR /app
 
 COPY --from=builder /install /usr/local
 
-COPY ./src/se/application/presentation/ /app/
+COPY ./src/se/domain/       /app/se/domain/
+COPY ./src/se/application/  /app/se/application/
 
 # ============ dev ============
 
 FROM base
 
-CMD ["fastapi", "run", "app.py", "--port", "8000"]
+CMD ["fastapi", "run", "se/application/presentation/app.py", "--port", "8000"]

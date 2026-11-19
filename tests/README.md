@@ -26,5 +26,10 @@
 - [ ] GET `/presentation/` returns `500` on internal error
 
 ### UseCase
-- [ ] `handle()` returns presentation card data
+- [x] `handle()` returns presentation card
 - [ ] `handle()` raises `NotFound` for unknown
+- [ ] gets presentation card from injected domain dependency
+
+### Domain
+
+- [x] presentation model returns presentation object-value
