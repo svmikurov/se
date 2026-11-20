@@ -6,8 +6,8 @@
 
 #### open `/ru/glossary/`
 - [x] returns `200`, title "Glossary"
-- [x] shows term definition
-- [x] shows term explanation
+- [x] The page displays hardcoded definition text
+- [x] The page displays hardcoded explanation text
 - [ ] shows next term definition
 - [ ] shows next term explanation
 - [ ] shows term explanation with timeout

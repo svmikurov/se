@@ -2,7 +2,7 @@
 
 from typing import Any
 
-from ..fixtures.payload import PRESENTATION_CARD
+from ...fixtures.presentation import PRESENTATION_CARD
 
 
 class FakeHttpClient:

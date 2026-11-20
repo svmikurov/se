@@ -34,8 +34,8 @@ class PresentationPage(BasePage):
         self._set_locators()
 
     def _set_locators(self) -> None:
-        self.question_text = self.page.get_by_test_id('question-text')
-        self.answer_text = self.page.get_by_test_id('answer-text')
+        self.question_locator = self.page.get_by_test_id('question-text')
+        self.answer_locator = self.page.get_by_test_id('answer-text')
 
 
 class TestGlossaryIndexPage:
@@ -54,5 +54,5 @@ class TestGlossaryPresentationPage:
     def test_shows_card(self, page: Page, base_url: str) -> None:
         page_obj = PresentationPage(page)
         page_obj.navigate(base_url)
-        expect(page_obj.question_text).to_be_visible()
-        expect(page_obj.answer_text).to_be_visible()
+        expect(page_obj.question_locator).to_have_text('Definition text')
+        expect(page_obj.answer_locator).to_have_text('Explanation text')

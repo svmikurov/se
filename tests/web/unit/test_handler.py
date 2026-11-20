@@ -6,8 +6,8 @@ from se.entrypoints.web.handlers import PresentationRequestHandler
 from se.infrastructure.api_clients import PresentationApi
 from se.infrastructure.http_clients import HttpClientProto
 
+from ...fixtures.presentation import PRESENTATION_CARD
 from ..fakes import FakeHttpClient
-from ..fixtures.payload import PRESENTATION_CARD
 
 
 @pytest.fixture
