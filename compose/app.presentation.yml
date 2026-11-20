@@ -1,0 +1,8 @@
+name: se
+
+services:
+  presentation:
+    build:
+      context: .
+      dockerfile: docker/services/presentation/Dockerfile
+    ports: ["${PRESENTATION_HOST_PORT}:${PRESENTATION_SERVICE_PORT}"]
