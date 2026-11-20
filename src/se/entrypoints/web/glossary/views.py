@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from dependency_injector.wiring import Provide, inject
 from django.views.generic.base import TemplateView
@@ -45,3 +45,9 @@ class PresentationView(TemplateView):
         if self._request_handler is None:
             raise AttributeError('UseCase not initialized')
         return self._request_handler
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        data = super().get_context_data(**kwargs)
+        data['definition_text'] = 'Definition text' 
+        data['explanation_text'] = 'Explanation text' 
+        return data
