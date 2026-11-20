@@ -1,10 +1,27 @@
-import pytest
+from __future__ import annotations
 
+from typing import TYPE_CHECKING, Generator
+
+import pytest
+from fastapi.testclient import TestClient
+
+from se.application.presentation.app import app
 from se.application.presentation.use_cases import PresentationUseCase
-from se.application.protocols import PresentationUseCaseProto
 from se.domain.models import PresentationDomain
-from se.domain.protocols import PresentationCardProto, PresentationDomainProto
 from se.domain.values import PresentationCard
+
+if TYPE_CHECKING:
+    from se.application.protocols import PresentationUseCaseProto
+    from se.domain.protocols import (
+        PresentationCardProto,
+        PresentationDomainProto,
+    )
+
+
+@pytest.fixture(scope='module')
+def client() -> Generator[TestClient]:
+    with TestClient(app) as client:
+        yield client
 
 
 @pytest.fixture
