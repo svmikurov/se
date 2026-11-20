@@ -10,6 +10,10 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(  # type: ignore[arg-type]
     path('admin/', admin.site.urls),
-    path('glossary/', include('glossary.urls'), name='glossary'),
+    path(
+        'glossary/',
+        include('se.entrypoints.web.glossary.urls'),
+        name='glossary',
+    ),
     prefix_default_language=True,  # /en/ and /ru/ (else False — / and /ru/))
 )

@@ -5,11 +5,15 @@ services:
     build:
       target: dev
     environment:
+      PYTHONPATH: /app/src
+      DJANGO_SETTINGS_MODULE: se.entrypoints.web.config.settings
       DJANGO_DEBUG: "true"
     user: "${DEV_UID:-1000}:${DEV_GID:-1000}"
     ports: ["${WEB_HOST_PORT}:${WEB_SERVICE_PORT}"]
     networks:
       - se-dev-net
     volumes:
-      - ./src/se/entrypoints/web:/app
-    command: python manage.py runserver 0.0.0.0:${WEB_SERVICE_PORT} --noreload
+      - ./src/se/entrypoints/web:/app/src/se/entrypoints/web
+      - ./src/se/domain:/app/src/se/domain
+      - ./src/se/infrastructure:/app/src/se/infrastructure
+    command: python -m se.entrypoints.web.manage runserver 0.0.0.0:8000 --noreload
