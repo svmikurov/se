@@ -42,6 +42,7 @@ src/
         admin/          # Database administration via Django ORM
       http_clients/   # HTTP client
       api_clients/    # Services API clients
+      repositories/
 tests/
   services/   # Microservices tests
   web/        # WEB BFF tests
