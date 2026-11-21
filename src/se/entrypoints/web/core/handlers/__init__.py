@@ -4,4 +4,4 @@ __all__ = [
     'PresentationRequestHandler',
 ]
 
-from .impl import PresentationRequestHandler
+from .presentation import PresentationRequestHandler

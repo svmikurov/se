@@ -1,4 +1,4 @@
-"""Request handler."""
+"""Presentation request handler."""
 
 from se.infrastructure.api_clients.protocols import PresentationApiProto
 from se.infrastructure.api_clients.schemas import PresentationCard
