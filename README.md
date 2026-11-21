@@ -29,6 +29,7 @@ docs/
 src/
   se/
     application/      # Microservices
+      presentation/
     domain/
     entrypoints/
       web/            # WEB Backend for frontend
@@ -39,7 +40,7 @@ src/
     infrastructure/
       db/
         admin/          # Database administration via Django ORM
-      http_clients/     # HTTP client
+      http_clients/   # HTTP client
       api_clients/    # Services API clients
 tests/
   services/   # Microservices tests
