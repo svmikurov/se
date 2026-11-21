@@ -1,5 +1,14 @@
+from dataclasses import dataclass
+
 from .protocols import PresentationCardProto
 from .values import PresentationCard
+
+
+@dataclass(frozen=True, slots=True)
+class Term:
+    id: int
+    definition: str
+    explanation: str
 
 
 class PresentationDomain:
