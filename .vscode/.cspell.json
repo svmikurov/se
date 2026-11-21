@@ -21,6 +21,7 @@
       "dotenv",
       "httpx",
       "fastapi",
+      "pydantic",
       // Pytest
       "pytest",
       "pytestmark",
