@@ -22,6 +22,7 @@ http://127.0.0.1:8200/ru/glossary/presentation/
 - [x] GET `/presentation/` returns `200` + JSON {definition, explanation}
 - [ ] GET `/presentation/` returns `404` for unknown
 - [ ] GET `/presentation/` returns `500` on internal error
+- [x] in-memory term repository returns list of terms
 
 ## Domain
 - [x] presentation model returns presentation object-value
