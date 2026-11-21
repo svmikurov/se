@@ -1,19 +1,23 @@
 from dataclasses import asdict
-from typing import Any
+from typing import Annotated, Any
 
-from fastapi import APIRouter
+from dependency_injector.wiring import Provide, inject
+from fastapi import APIRouter, Depends
 
-from se.domain.models import PresentationDomain
-
+from ..protocols import PresentationUseCaseProto
+from .di import Container
 from .schemas import PresentationSchema
-from .use_cases import PresentationUseCase
 
 router = APIRouter(prefix='/presentation')
 
 
 @router.get('/', response_model=PresentationSchema)
-def presentation() -> dict[str, Any]:
-    domain = PresentationDomain()
-    use_case = PresentationUseCase(domain=domain)
+@inject
+def presentation(
+    use_case: Annotated[
+        PresentationUseCaseProto,
+        Depends(Provide[Container.use_case]),
+    ],
+) -> dict[str, Any]:
     card = use_case.handle()
     return {'presentation': asdict(card)}  # type: ignore[call-overload]
