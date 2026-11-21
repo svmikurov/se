@@ -1,7 +1,15 @@
 """Protocols for HTTP Client interface."""
 
-from typing import Any, Protocol
+from typing import Any, Callable, Protocol
 
 
-class HttpClientProto(Protocol):
-    def get(self, *args: object, **kwargs: object) -> dict[str, Any]: ...
+class HasJson(Protocol):
+    @property
+    def json(self) -> Callable[[], dict[str, Any]]: ...
+
+
+class HttpClientProto(
+    HasJson,
+    Protocol,
+):
+    def get(self, *args: object, **kwargs: object) -> HasJson: ...

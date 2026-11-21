@@ -8,7 +8,7 @@ E2E_WEB_COMPOSE := docker compose \
 	-f compose/networks.yml \
 	-f compose/web.e2e.yml
 
-web-e2e: web-recreate # Run Playwright E2E against web (web must be running)
+web-e2e: web-restart presentation-restart  # Run Playwright E2E against web (web must be running)
 	$(E2E_WEB_COMPOSE) run --rm --build web-e2e
 
 web-e2e-logs:  # Follow web-e2e container logs
@@ -24,6 +24,7 @@ web-e2e-help:
 	@echo "=================================================================="
 	@echo ""
 	@printf "$(HELP_FORMAT)" "web-e2e"         "Run Playwright E2E against web (web must be running)"
+	@echo ""
 	@printf "$(HELP_FORMAT)" "web-e2e-logs"    "Follow web-e2e container logs (tail=$(LOG_TAIL))"
 	@echo ""
 	@printf "$(HELP_FORMAT)" "web-e2e-help"    "Show this help"

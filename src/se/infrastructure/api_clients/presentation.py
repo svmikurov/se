@@ -1,5 +1,7 @@
 """Presentation Service API client."""
 
+import os
+
 from se.infrastructure.api_clients.schemas import PresentationCard
 from se.infrastructure.http_clients import HttpClientProto
 
@@ -12,8 +14,10 @@ class PresentationApi:
         self._http_client = http_client
 
     def get_card(self) -> PresentationCard:
-        payload = self._http_client.get()
+        url = os.getenv('PRESENTATION_SERVICE_URL')
+        response = self._http_client.get(f'{url}/presentation')
+        payload = response.json()
         return PresentationCard(
-            definition=payload['definition'],
-            explanation=payload['explanation'],
+            definition=payload['presentation']['definition'],
+            explanation=payload['presentation']['explanation'],
         )

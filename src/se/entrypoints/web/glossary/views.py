@@ -1,19 +1,21 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING
 
 from dependency_injector.wiring import Provide, inject
 from django.views.generic.base import TemplateView
 
+from se.domain.protocols import PresentationCardProto
+from se.entrypoints.web.core.base.views import RequestHandlerMixin
 from se.entrypoints.web.di import Container
 
 if TYPE_CHECKING:
+    from typing import Any
+
     from django.http.request import HttpRequest
     from django.http.response import HttpResponseBase
 
-    from se.domain.protocols import PresentationCardProto
-
-    from ..handlers.protocols import RequestHandlerProto
+    from ..core.handlers.protocols import RequestHandlerProto
 
     type _RequestHandlerT = RequestHandlerProto[PresentationCardProto]
 
@@ -22,7 +24,10 @@ class IndexView(TemplateView):
     template_name = 'index.html'
 
 
-class PresentationView(TemplateView):
+class PresentationView(
+    RequestHandlerMixin[PresentationCardProto],
+    TemplateView,
+):
     """Translation study test exercise view."""
 
     template_name = 'presentation.html'
@@ -40,14 +45,8 @@ class PresentationView(TemplateView):
         self._request_handler = request_handler
         return super().dispatch(request, *args, **kwargs)
 
-    @property
-    def use_case(self) -> _RequestHandlerT:
-        if self._request_handler is None:
-            raise AttributeError('UseCase not initialized')
-        return self._request_handler
-
-    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        data = super().get_context_data(**kwargs)
-        data['definition_text'] = 'Definition text' 
-        data['explanation_text'] = 'Explanation text' 
+    def get_handler_data(self) -> dict[str, Any]:
+        data = super().get_handler_data()
+        data['definition_text'] = 'Definition text'
+        data['explanation_text'] = 'Explanation text'
         return data

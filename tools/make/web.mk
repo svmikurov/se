@@ -8,6 +8,7 @@ LOG_TAIL     	 := 200
 DC_WEB := docker compose \
 	--project-directory . \
 	--env-file .envs/web \
+	--env-file .envs/presentation \
 	-f compose/networks.yml \
 	-f compose/web.base.yml \
 	-f compose/web.dev.yml

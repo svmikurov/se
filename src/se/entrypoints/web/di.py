@@ -3,7 +3,7 @@ from httpx import Client
 
 from se.infrastructure.api_clients.presentation import PresentationApi
 
-from .handlers import PresentationRequestHandler
+from .core.handlers import PresentationRequestHandler
 
 
 class Container(containers.DeclarativeContainer):

@@ -2,17 +2,17 @@
 
 import pytest
 
-from se.entrypoints.web.handlers import PresentationRequestHandler
+from se.entrypoints.web.core.handlers import PresentationRequestHandler
 from se.infrastructure.api_clients import PresentationApi
 from se.infrastructure.http_clients import HttpClientProto
+from tests.fixtures.presentation import PRESENTATION_CARD
 
-from ...fixtures.presentation import PRESENTATION_CARD
 from ..fakes import FakeHttpClient
 
 
 @pytest.fixture
 def http_client() -> HttpClientProto:
-    return FakeHttpClient()
+    return FakeHttpClient()  # type: ignore
 
 
 @pytest.fixture

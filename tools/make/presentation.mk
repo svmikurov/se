@@ -9,6 +9,7 @@ PRESENTATION_SERVICE_PORT := 8000
 DC_PRESENTATION := docker compose \
 	--project-directory . \
 	--env-file .envs/presentation \
+	-f compose/networks.yml \
 	-f compose/app.presentation.yml
 
 presentation-build: ## Build service image
@@ -23,7 +24,7 @@ presentation-run:  ## Run service server on http://localhost:$(PRESENTATION_SERV
 	@echo "🌐 Container started. Service: http://localhost:$(PRESENTATION_HOST_PORT)"
 
 presentation-stop: ## Stop service server
-	-docker stop $(DOCS_SERVICE_NAME)
+	-docker stop $(PRESENTATION_SERVICE_NAME)
 
 presentation-logs:
 	docker logs $(PRESENTATION_SERVICE_NAME)
@@ -33,6 +34,15 @@ presentation-up:  ## Build + start container
 
 presentation-down:  ## Down: stop/remove container
 	$(DC_PRESENTATION) down	
+
+presentation-restart:  ## Restart service process (picks up code from bind-mount; no compose/env/Dockerfile changes)
+	$(DC_PRESENTATION) restart $(PRESENTATION_SERVICE_NAME)
+
+presentation-recreate:  ## Recreate service container: applies compose/env changes (no rebuild)
+	$(DC_PRESENTATION) up -d --force-recreate --no-deps $(PRESENTATION_SERVICE_NAME)
+
+wpresentationeb-rebuild:  ## Rebuild + recreate service container: applies Dockerfile/deps changes
+	$(DC_PRESENTATION) up -d --build --force-recreate --no-deps $(PRESENTATION_SERVICE_NAME)
 
 # Help
 # ====
@@ -46,10 +56,12 @@ presentation-help:
 	@printf "$(HELP_FORMAT)" "presentation-build" "Build service image"
 	@echo ""
 	@printf "$(HELP_FORMAT)" "presentation-run"   "Run service server on http://localhost:$(PRESENTATION_HOST_PORT)"
-	@echo ""
 	@printf "$(HELP_FORMAT)" "presentation-stop"  "Stop service server"
 	@echo ""
 	@printf "$(HELP_FORMAT)" "presentation-up"	  "Build + start container"
-	@echo ""
 	@printf "$(HELP_FORMAT)" "presentation-down"  "Down: stop/remove container"
+	@echo ""
+	@printf "$(HELP_FORMAT)" "presentation-restart"		"Restart service process (bind-mount code only)"
+	@printf "$(HELP_FORMAT)" "presentation-recreate"	"Recreate service container (compose/env changes, no rebuild)"
+	@printf "$(HELP_FORMAT)" "presentation-rebuild"		"Rebuild + recreate service container (Dockerfile/deps changes)"
 	@echo ""
