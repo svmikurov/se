@@ -28,6 +28,7 @@ docker/     # Dockerfiles
 docs/
 src/
   se/
+    application/      # Microservices
     domain/
     entrypoints/
       web/            # WEB Backend for frontend
@@ -38,23 +39,22 @@ src/
     infrastructure/
       db/
         admin/          # Database administration via Django ORM
-      http/           # HTTP client
+      http_clients/     # HTTP client
       api_clients/    # Services API clients
 tests/
+  services/   # Microservices tests
   web/        # WEB BFF tests
     e2e/        # Playwright (browser, DOM) tests
     unit/
-    ...         # Test tools: fakes, fixtures
+  ...         # Test tools: fakes, fixtures
 tools/
   just/     # Just recipes
   make/     # Makefile commands
 ```
 
-## Workflow
+## Workflow (Development mode)
 
-### Development mode
-
-#### Add environments and secrets examples
+### Add environments and secrets examples
 
 See: `.envs.example`
 
@@ -63,13 +63,13 @@ make environments   # Add environments example
 make secrets        # Add secrets example
 ```
 
-#### Add networks
+### Add networks
 
 ```bash
 make net-create     # Create networks
 ```
 
-#### Database administration
+### Database administration
 
 ```bash
 make admin-up       # Start service on http://127.0.0.1:$(ADMIN_HOST_PORT)
@@ -79,12 +79,22 @@ make admin-su       # Create superuser
 
 For example DB administration URL: http://127.0.0.1:8100/admin/
 
-#### Start services
+### Start project
+
+#### Start presentation service
 
 ```bash
-make web-up         # Start web entrypoint on http://127.0.0.1:$(WEB_HOST_PORT)
+make presentation-up  # Start Presentation exercise HTTP service on http://127.0.0.1:$(PRESENTATION_HOST_PORT)
 ```
-For example WEB URL: http://127.0.0.1:8200/ru/glossary/
+
+For example URL: http://127.0.0.1:8400/presentation/
+
+#### Start WEB backend for frontend
+
+```bash
+make web-up         # Start WEB BFF entrypoint on http://127.0.0.1:$(WEB_HOST_PORT)
+```
+For example URL: http://127.0.0.1:8200/ru/glossary/
 
 ##### Localize
 
@@ -93,19 +103,26 @@ make web-compilemessages    # Compile .po files to .mo
 make web-restart            # Restart web process
 ```
 
-#### Add dependencies for development
+### Add dependencies for development
 
 ```bash
 make setup          # Install project with development dependencies
 ```
 
-#### Run e2e tests
+### Tests
+
+#### Unit
+```bash
+make check          # Run linter, type check, pytest
+```
+
+#### WEB BFF e2e
 
 ```bash
 make web-e2e        # Run Playwright E2E against web (web must be running)
 ```
 
-#### Project documentation
+## Project documentation
 
 ```bash
 make docs-build     # Build documentation image
