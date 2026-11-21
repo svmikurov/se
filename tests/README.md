@@ -23,8 +23,9 @@ http://127.0.0.1:8200/ru/glossary/presentation/
 - [ ] GET `/presentation/` returns `404` for unknown
 - [ ] GET `/presentation/` returns `500` on internal error
 - [x] in-memory term repository returns list of terms
+- [ ] _**> Add DI**_
 
 ## Domain
 - [x] presentation model returns presentation object-value
 - [ ] created random presentation card (fix hardcoded presentation card)
-- [ ] _**> glossary repository provides terms for presentation card creation**_
+- [ ] _**glossary repository provides terms for presentation card creation**_
