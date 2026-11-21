@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, Generator
 import pytest
 from fastapi.testclient import TestClient
 
-from se.application.presentation.app import app
+from se.application.presentation.main import app
 from se.application.presentation.use_cases import PresentationUseCase
 from se.domain.models import PresentationDomain
 from se.domain.values import PresentationCard
