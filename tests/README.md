@@ -2,7 +2,7 @@
 
 ## Context
 
-Glossary presentation study page providers presentation card  
+Glossary term study presentation page shows presentation card  
 http://127.0.0.1:8200/ru/glossary/presentation/
 
 ## WEB BFF
@@ -18,12 +18,15 @@ http://127.0.0.1:8200/ru/glossary/presentation/
 - [ ] `request_handler.handle()` raises `NotFound` for unknown
 - [x] gets presentation card from injected domain dependency
 
+## Infrastructure
+- [ ] _**> service HTTP client handles request errors**_
+
 ## Service API
 - [x] GET `/presentation/` returns `200` + JSON {definition, explanation}
 - [ ] GET `/presentation/` returns `404` for unknown
 - [ ] GET `/presentation/` returns `500` on internal error
 - [x] in-memory term repository returns list of terms
-- [ ] _**> Add DI**_
+- [x] Add DI
 
 ## Domain
 - [x] presentation model returns presentation object-value
