@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, override
 
 from dependency_injector.wiring import Provide, inject
 from django.views.generic.base import TemplateView
@@ -45,8 +45,10 @@ class PresentationView(
         self._request_handler = request_handler
         return super().dispatch(request, *args, **kwargs)
 
+    @override
     def get_handler_data(self) -> dict[str, Any]:
         data = super().get_handler_data()
-        data['definition_text'] = 'Definition text'
-        data['explanation_text'] = 'Explanation text'
+        result = self.request_handler.handle()
+        data['definition_text'] = result.definition
+        data['explanation_text'] = result.explanation
         return data
