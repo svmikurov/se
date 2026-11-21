@@ -1,1 +1,4 @@
 fastapi[standard]==0.164.0,<0.165.0
+dependency_injector==4.49.1
+
+se-tools @ git+https://github.com/svmikurov/se-tools.git@v0.1.0
