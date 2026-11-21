@@ -26,3 +26,4 @@ Open page with `/ru/glossary/` path returns presentation exercise
 
 ## Domain
 - [x] presentation model returns presentation object-value
+- [ ] created random presentation card from (fix hardcoded presentation card)
