@@ -6,6 +6,7 @@ include tools/make/docs.mk
 include tools/make/app.mk
 include tools/make/check.mk
 include tools/make/net.mk
+include tools/make/db.mk
 include tools/make/db.admin.mk
 include tools/make/web.mk
 include tools/make/web.e2e.mk
