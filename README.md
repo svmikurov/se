@@ -40,7 +40,7 @@ src/
     infrastructure/
       db/
         admin/          # Database administration via Django ORM
-      http_clients/   # HTTP client
+      http_client/    # HTTP client
       api_clients/    # Services API clients
       repositories/
 tests/
