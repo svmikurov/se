@@ -1,6 +1,6 @@
 """Presentation microservice tests."""
 
-from se.application.protocols import PresentationUseCaseProto
+from se.application.presentation import PresentationUseCaseProto
 from se.domain.protocols import PresentationCardProto
 
 

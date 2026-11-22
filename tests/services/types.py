@@ -1,6 +1,6 @@
 from typing import Protocol
 
-from se.application.protocols import HasAdd, HasList
+from se.application.presentation import HasAdd, HasList
 from se.domain import Term
 
 
