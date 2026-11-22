@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-15 16:31+0000\n"
+"POT-Creation-Date: 2026-11-22 08:41+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,34 +18,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: config/settings.py:98
+#: se/entrypoints/web/config/settings.py:98
 msgid "English"
 msgstr "English"
 
-#: config/settings.py:99
+#: se/entrypoints/web/config/settings.py:99
 msgid "Russian"
 msgstr "Russian"
 
-#: templates/index.html:5
+#: se/entrypoints/web/templates/index.html:5
 msgid "glossary.page.index.title"
 msgstr "Glossary"
 
-#: templates/index.html:8
+#: se/entrypoints/web/templates/index.html:8
 msgid "Glossary"
 msgstr "Glossary"
 
-#: templates/presentation.html:5
+#: se/entrypoints/web/templates/presentation.html:5
 msgid "glossary.page.presentation.title"
 msgstr "Presentation"
 
-#: templates/presentation.html:8
+#: se/entrypoints/web/templates/presentation.html:8
 msgid "Presentation"
 msgstr "Presentation"
 
-#: templates/presentation.html:10
+#: se/entrypoints/web/templates/presentation.html:10
 msgid "Question"
 msgstr "Question"
 
-#: templates/presentation.html:13
+#: se/entrypoints/web/templates/presentation.html:13
 msgid "Answer"
 msgstr "Answer"

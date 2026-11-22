@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-15 16:31+0000\n"
+"POT-Creation-Date: 2026-11-22 08:41+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,34 +20,34 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: config/settings.py:98
+#: se/entrypoints/web/config/settings.py:98
 msgid "English"
 msgstr "Английский"
 
-#: config/settings.py:99
+#: se/entrypoints/web/config/settings.py:99
 msgid "Russian"
 msgstr "Русский"
 
-#: templates/index.html:5
+#: se/entrypoints/web/templates/index.html:5
 msgid "glossary.page.index.title"
 msgstr "Глоссарий"
 
-#: templates/index.html:8
+#: se/entrypoints/web/templates/index.html:8
 msgid "Glossary"
 msgstr "Глоссарий"
 
-#: templates/presentation.html:5
+#: se/entrypoints/web/templates/presentation.html:5
 msgid "glossary.page.presentation.title"
 msgstr "Презентация"
 
-#: templates/presentation.html:8
+#: se/entrypoints/web/templates/presentation.html:8
 msgid "Presentation"
 msgstr "Презентация"
 
-#: templates/presentation.html:10
+#: se/entrypoints/web/templates/presentation.html:10
 msgid "Question"
 msgstr "Вопрос"
 
-#: templates/presentation.html:13
+#: se/entrypoints/web/templates/presentation.html:13
 msgid "Answer"
 msgstr "Ответ"
