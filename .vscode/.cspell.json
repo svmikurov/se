@@ -22,6 +22,7 @@
       "httpx",
       "fastapi",
       "pydantic",
+      "respx",
       // Pytest
       "pytest",
       "pytestmark",
