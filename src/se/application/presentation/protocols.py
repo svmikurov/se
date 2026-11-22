@@ -22,3 +22,9 @@ class HasList[Item](Protocol):
         limit: int | None = None,
         **filters: dict[str, Any],
     ) -> list[Item]: ...
+
+
+class PresentationRepositoryProto[Item](
+    HasList[Item],
+    Protocol,
+): ...

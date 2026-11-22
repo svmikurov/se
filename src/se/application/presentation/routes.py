@@ -4,7 +4,7 @@ from typing import Annotated, Any
 from dependency_injector.wiring import Provide, inject
 from fastapi import APIRouter, Depends
 
-from ..protocols import PresentationUseCaseProto
+from . import PresentationUseCaseProto
 from .di import Container
 from .schemas import PresentationSchema
 
