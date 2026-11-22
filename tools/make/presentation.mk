@@ -10,7 +10,7 @@ DC_PRESENTATION := docker compose \
 	--project-directory . \
 	--env-file .envs/presentation \
 	-f compose/networks.yml \
-	-f compose/app.presentation.yml
+	-f compose/app.presentation.dev.yml
 
 presentation-build: ## Build service image
 	docker build -f docker/services/presentation/Dockerfile -t $(PRESENTATION_SERVICE_NAME) .
