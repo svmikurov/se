@@ -25,6 +25,7 @@ class HasList[Item](Protocol):
 
 
 class PresentationRepositoryProto[Item](
+    HasAdd[Item],
     HasList[Item],
     Protocol,
 ): ...

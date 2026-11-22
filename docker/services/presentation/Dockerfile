@@ -31,8 +31,9 @@ WORKDIR /app
 
 COPY --from=builder /install /usr/local
 
-COPY ./src/se/domain/       /app/se/domain/
-COPY ./src/se/application/  /app/se/application/
+COPY ./src/se/domain/                       /app/se/domain/
+COPY ./src/se/application/                  /app/se/application/
+COPY ./src/se/infrastructure/repositories   /app/se/infrastructure/repositories
 
 # ============ dev ============
 

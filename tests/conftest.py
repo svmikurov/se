@@ -2,13 +2,15 @@ from __future__ import annotations
 
 import os
 from typing import TYPE_CHECKING
+from unittest.mock import Mock
 
 import pytest
 from fastapi.testclient import TestClient
 
+from se.application.presentation import PresentationRepositoryProto
 from se.application.presentation.main import app
 from se.application.presentation.use_cases import PresentationUseCase
-from se.domain import PresentationCard, PresentationDomain
+from se.domain import PresentationCard, PresentationDomain, Term
 from se.infrastructure.repositories import InMemoryTermRepository
 
 if TYPE_CHECKING:
@@ -16,13 +18,11 @@ if TYPE_CHECKING:
 
     from se.application.presentation import (
         HasList,
-        PresentationRepositoryProto,
         PresentationUseCaseProto,
     )
     from se.domain import (
         PresentationCardProto,
         PresentationDomainProto,
-        Term,
         TermProto,
     )
 
@@ -74,8 +74,15 @@ def client() -> Generator[TestClient]:
 
 
 @pytest.fixture
-def in_memory_term_repo() -> HasList[Term]:
+def in_memory_term_repo() -> HasList[TermProto]:
     return InMemoryTermRepository()
+
+
+@pytest.fixture
+def mock_term_repo(term_items: list[dict[str, Any]]) -> Mock:
+    mock = Mock(spec=PresentationRepositoryProto)
+    mock.list.return_value = [Term(**data) for data in term_items]
+    return mock
 
 
 # Application (Services)

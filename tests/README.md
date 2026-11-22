@@ -22,16 +22,16 @@ http://127.0.0.1:8200/ru/glossary/presentation/
 - [ ] service HTTP client handles request errors
 - [ ] server returns `404`
 - [x] in-memory term repository returns list of terms
-- [ ] >>> _**repository adds terms**_
+- [x] repository adds terms
 
 ## Service API
 - [x] GET `/presentation/` returns `200` + JSON {definition, explanation}
 - [ ] GET `/presentation/` returns `404` for unknown
 - [ ] GET `/presentation/` returns `500` on internal error
 - [x] Add DI
-- [ ] _**use case gets terms via repository**_
+- [x] use case gets terms via repository
 
 ## Domain
 - [x] presentation model returns presentation object-value
 - [ ] created random presentation card (fix hardcoded presentation card)
-- [ ] _**glossary repository provides terms for presentation card creation**_
+- [x] repository provides terms for presentation card creation

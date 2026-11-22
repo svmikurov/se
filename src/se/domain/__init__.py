@@ -2,7 +2,7 @@
 
 __all__ = [
     # === Interfaces ===
-    # - object fields
+    #  - object fields
     'HasIdentifier',
     'HasDefinition',
     'HasExplanation',
@@ -12,15 +12,22 @@ __all__ = [
     'TermProto',
     # - services
     'PresentationDomainProto',
+    #
     # === Implementation ===
-    # - value-objects
+    #  - value-objects
     'PresentationCard',
     # - entities
     'Term',
     # - services
     'PresentationDomain',
+    #
+    # === Exceptions ===
+    'NoItemsForExercise',
 ]
 
+from .exceptions import (
+    NoItemsForExercise,
+)
 from .models import (
     PresentationDomain,
     Term,
