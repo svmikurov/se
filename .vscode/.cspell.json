@@ -28,6 +28,8 @@
       "pytestmark",
       "addopts",
       "testpaths",
+      // DB
+      "dict_row",
       // Sphinx
       "toctree",
       // Docker

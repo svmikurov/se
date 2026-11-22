@@ -26,6 +26,10 @@ if TYPE_CHECKING:
         TermProto,
     )
 
+pytest_plugins = [
+    'tests.fixtures.db',
+]
+
 
 # Required at import time by presentation api until URL
 # is moved to Settings (see FIXME in api_client/presentation.py)
