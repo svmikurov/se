@@ -13,10 +13,10 @@ if TYPE_CHECKING:
 
 
 def test_repo_returns_term_object_list(
-    terms_data: list[dict[str, Any]],
+    term_items: list[dict[str, Any]],
     in_memory_term_repo: RepoProto,
 ) -> None:
-    expected = [Term(**term) for term in terms_data]
+    expected = [Term(**term) for term in term_items]
     in_memory_term_repo.add(expected)
 
     terms = in_memory_term_repo.list()

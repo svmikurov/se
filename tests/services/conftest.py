@@ -30,7 +30,7 @@ if TYPE_CHECKING:
 
 
 @pytest.fixture
-def terms_data() -> list[dict[str, Any]]:
+def term_items() -> list[dict[str, Any]]:
     term_count = 3
     return [
         {
