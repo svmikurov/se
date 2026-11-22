@@ -4,7 +4,7 @@ import pytest
 
 from se.entrypoints.web.core.handlers import PresentationRequestHandler
 from se.infrastructure.api_clients import PresentationApi
-from se.infrastructure.http_clients import HttpClientProto
+from se.infrastructure.http_client import HttpClientProto
 from tests.fakes import FakeHttpClient
 from tests.fixtures.presentation import PRESENTATION_CARD
 

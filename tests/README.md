@@ -20,6 +20,7 @@ http://127.0.0.1:8200/ru/glossary/presentation/
 
 ## Infrastructure
 - [ ] _**> service HTTP client handles request errors**_
+- [ ] server returns `404`
 
 ## Service API
 - [x] GET `/presentation/` returns `200` + JSON {definition, explanation}

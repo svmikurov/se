@@ -2,7 +2,7 @@
 
 from typing import Any
 
-from se.infrastructure.http_clients.protocol import HasJson
+from se.infrastructure.http_client import HasJson
 from tests.fixtures.presentation import PRESENTATION_CARD
 
 
