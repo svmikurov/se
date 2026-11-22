@@ -12,7 +12,9 @@ if TYPE_CHECKING:
     from fastapi.testclient import TestClient
 
 
-def test_read_item(client: TestClient, mock_term_repo: Mock) -> None:
+def test_returns_presentation_card(
+    client: TestClient, mock_term_repo: Mock
+) -> None:
     with app.container.in_memory_repository.override(mock_term_repo):  # type: ignore[attr-defined]
         response = client.get('/presentation/')
 
@@ -20,3 +22,10 @@ def test_read_item(client: TestClient, mock_term_repo: Mock) -> None:
     term_presentation_card = response.json()['presentation']
     assert 'definition_' in term_presentation_card['definition']
     assert 'explanation_' in term_presentation_card['explanation']
+
+
+def test_returns_no_content_on_no_presentation_card(
+    client: TestClient,
+) -> None:
+    response = client.get('/presentation/')
+    assert response.status_code == 204

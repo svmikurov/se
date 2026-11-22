@@ -22,6 +22,9 @@ def test_use_case_returns_card(
     term_items: list[dict[str, Any]],
 ) -> None:
     in_memory_term_repo.add([Term(**data) for data in term_items])
+
     card = use_case.handle()
+
+    assert card is not None, 'Domain did not return presentation card'
     assert 'definition_' in card.definition
     assert 'explanation_' in card.explanation
