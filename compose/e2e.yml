@@ -1,0 +1,110 @@
+name: se-e2e
+
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD_FILE=/run/secrets/database_password
+    secrets:
+      - database_password
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - se-admin-internal 
+    restart: unless-stopped
+
+  admin:
+    build:
+      context: .
+      dockerfile: ./docker/db/admin/Dockerfile
+      target: dev
+    environment:
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PASSWORD_FILE: /run/secrets/database_password
+      DJANGO_SECRET_KEY_FILE: /run/secrets/admin_secret_key
+      DJANGO_DEBUG: "true"
+    secrets:
+      - database_password
+      - admin_secret_key
+    user: "${DEV_UID:-1000}:${DEV_GID:-1000}"
+    ports: ["${ADMIN_HOST_PORT}:${ADMIN_SERVICE_PORT}"]
+    init: true
+    networks:
+      - se-dev-net
+      - se-admin-internal
+    volumes:
+      - ./src/se/infrastructure/db/admin:/app
+      - ./dumps:/app/dumps    
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: python manage.py runserver 0.0.0.0:${ADMIN_SERVICE_PORT} --noreload
+
+  presentation:
+    build:
+      context: .
+      dockerfile: docker/services/presentation/Dockerfile
+    ports: ["${PRESENTATION_HOST_PORT}:${PRESENTATION_SERVICE_PORT}"]
+    networks:
+      - se-dev-net
+
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/web/Dockerfile
+      target: dev
+    environment:
+      PYTHONPATH: /app
+      DJANGO_SETTINGS_MODULE: se.entrypoints.web.config.settings
+      PRESENTATION_SERVICE_URL: "http://${PRESENTATION_SERVICE_NAME}:${PRESENTATION_SERVICE_PORT}"
+      DJANGO_SECRET_KEY_FILE: /run/secrets/web_secret_key
+      DJANGO_DEBUG: "true"
+    secrets:
+      - web_secret_key
+    init: true
+        user: "${DEV_UID:-1000}:${DEV_GID:-1000}"
+    ports: ["${WEB_HOST_PORT}:${WEB_SERVICE_PORT}"]
+    networks:
+      - se-dev-net
+    volumes:
+      - ./src/se/entrypoints/web:/app/se/entrypoints/web
+      - ./src/se/domain:/app/se/domain
+      - ./src/se/infrastructure/api_clients:/app/se/infrastructure/api_clients
+      - ./src/se/infrastructure/http_client:/app/se/infrastructure/http_client
+    command: python -m se.entrypoints.web.manage runserver 0.0.0.0:${WEB_SERVICE_PORT} --noreload
+
+  test:
+    build:
+      context: .
+      dockerfile: ./docker/e2e/Dockerfile
+    environment:
+      BASE_URL: http://web:${WEB_SERVICE_PORT}
+      HEADLESS: "1"
+      TEST_RESULTS_DIR: /results
+    working_dir: /tests
+    networks:
+      - se-dev-net
+    volumes:
+      - ./tests/web/e2e:/tests:ro
+      - ./test-results:/results
+    shm_size: "1gb"
+    init: true
+
+secrets:
+  database_password:
+    file: ./secrets/database_password
+  admin_secret_key:
+    file: ./secrets/admin_secret_key
+
+volumes:
+  postgres-data:
