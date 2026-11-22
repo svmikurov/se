@@ -17,6 +17,7 @@ http://127.0.0.1:8200/ru/glossary/presentation/
 - [x] `request_handler.handle()` returns presentation card
 - [ ] `request_handler.handle()` raises `NotFound` for unknown
 - [x] gets presentation card from injected domain dependency
+- [ ] > _**`request_handler.handle()` returns friendly message on `204` Service API status**_
 
 ## Infrastructure
 - [ ] service HTTP client handles request errors
@@ -28,6 +29,7 @@ http://127.0.0.1:8200/ru/glossary/presentation/
 - [x] GET `/presentation/` returns `200` + JSON {definition, explanation}
 - [ ] GET `/presentation/` returns `404` for unknown
 - [ ] GET `/presentation/` returns `500` on internal error
+- [ ] >> _**GET `/presentation/` returns `204` on `NoItemsForExercise` domain exception**_
 - [x] Add DI
 - [x] use case gets terms via repository
 
