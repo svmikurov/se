@@ -41,7 +41,7 @@ presentation-restart:  ## Restart service process (picks up code from bind-mount
 presentation-recreate:  ## Recreate service container: applies compose/env changes (no rebuild)
 	$(DC_PRESENTATION) up -d --force-recreate --no-deps $(PRESENTATION_SERVICE_NAME)
 
-wpresentationeb-rebuild:  ## Rebuild + recreate service container: applies Dockerfile/deps changes
+presentation-rebuild:  ## Rebuild + recreate service container: applies Dockerfile/deps changes
 	$(DC_PRESENTATION) up -d --build --force-recreate --no-deps $(PRESENTATION_SERVICE_NAME)
 
 # Help
