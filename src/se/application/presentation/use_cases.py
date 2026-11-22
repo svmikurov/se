@@ -18,4 +18,5 @@ class PresentationUseCase:
 
     def handle(self) -> PresentationCardProto:
         terms = self._repo.list()
-        return self._domain.create_card(terms)
+        term_presentation_card = self._domain.create_card(terms)
+        return term_presentation_card
