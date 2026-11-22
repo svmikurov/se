@@ -17,5 +17,5 @@ services:
       - ./src/se/entrypoints/web:/app/se/entrypoints/web
       - ./src/se/domain:/app/se/domain
       - ./src/se/infrastructure/api_clients:/app/se/infrastructure/api_clients
-      - ./src/se/infrastructure/http_clients:/app/se/infrastructure/http_clients
+      - ./src/se/infrastructure/http_client:/app/se/infrastructure/http_client
     command: python -m se.entrypoints.web.manage runserver 0.0.0.0:${WEB_SERVICE_PORT} --noreload
