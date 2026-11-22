@@ -1,10 +1,15 @@
-from se.domain.protocols import (
-    PresentationCardProto,
-    PresentationDomainProto,
-    TermProto,
-)
+from __future__ import annotations
 
-from . import PresentationRepositoryProto
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from se.domain.protocols import (
+        PresentationCardProto,
+        PresentationDomainProto,
+        TermProto,
+    )
+
+    from . import PresentationRepositoryProto
 
 
 class PresentationUseCase:
@@ -17,6 +22,6 @@ class PresentationUseCase:
         self._repo = repo
 
     def handle(self) -> PresentationCardProto:
-        terms = self._repo.list()
+        terms: list[TermProto] = self._repo.list()
         term_presentation_card = self._domain.create_card(terms)
         return term_presentation_card
