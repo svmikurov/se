@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from .protocols import PresentationCardProto
+from .protocols import PresentationCardProto, TermProto
 from .values import PresentationCard
 
 
@@ -12,7 +12,7 @@ class Term:
 
 
 class PresentationDomain:
-    def create_card(self) -> PresentationCardProto:
+    def create_card(self, items: list[TermProto]) -> PresentationCardProto:
         """Create presentation card."""
         return PresentationCard(
             definition='Definition text',

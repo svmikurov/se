@@ -7,9 +7,8 @@ from fastapi.testclient import TestClient
 
 from se.application.presentation.main import app
 from se.application.presentation.use_cases import PresentationUseCase
-from se.domain.models import PresentationDomain
-from se.domain.values import PresentationCard
-from se.infrastructure.repositories.term import InMemoryTermRepository
+from se.domain import PresentationCard, PresentationDomain
+from se.infrastructure.repositories import InMemoryTermRepository
 
 if TYPE_CHECKING:
     from typing import Any, Generator
@@ -19,10 +18,11 @@ if TYPE_CHECKING:
         PresentationRepositoryProto,
         PresentationUseCaseProto,
     )
-    from se.domain import Term
-    from se.domain.protocols import (
+    from se.domain import (
         PresentationCardProto,
         PresentationDomainProto,
+        Term,
+        TermProto,
     )
 
 
@@ -46,7 +46,7 @@ def terms_data() -> list[dict[str, Any]]:
 
 
 @pytest.fixture
-def presentation_domain() -> PresentationDomainProto:
+def presentation_domain() -> PresentationDomainProto[TermProto]:
     return PresentationDomain()
 
 
@@ -77,8 +77,8 @@ def in_memory_term_repo() -> HasList[Term]:
 
 @pytest.fixture
 def use_case(
-    presentation_domain: PresentationDomainProto,
-    in_memory_term_repo: PresentationRepositoryProto[PresentationCardProto],
+    presentation_domain: PresentationDomainProto[TermProto],
+    in_memory_term_repo: PresentationRepositoryProto[TermProto],
 ) -> PresentationUseCaseProto:
     return PresentationUseCase(
         domain=presentation_domain,

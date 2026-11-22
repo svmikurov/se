@@ -2,7 +2,12 @@
 
 from typing import Protocol
 
-# Value-objects
+# Model fields
+
+
+class HasIdentifier(Protocol):
+    @property
+    def id(self) -> int: ...
 
 
 class HasDefinition(Protocol):
@@ -15,6 +20,9 @@ class HasExplanation(Protocol):
     def explanation(self) -> str: ...
 
 
+# Value-objects
+
+
 class PresentationCardProto(
     HasDefinition,
     HasExplanation,
@@ -25,5 +33,16 @@ class PresentationCardProto(
 # Entities
 
 
-class PresentationDomainProto(Protocol):
-    def create_card(self) -> PresentationCardProto: ...
+class TermProto(
+    HasIdentifier,
+    HasDefinition,
+    HasExplanation,
+    Protocol,
+): ...
+
+
+# Services
+
+
+class PresentationDomainProto[Item](Protocol):
+    def create_card(self, items: list[Item]) -> PresentationCardProto: ...
