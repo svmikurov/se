@@ -11,6 +11,8 @@ from .abstract import AddRepository, ListRepository
 
 DB_NAME = os.getenv('DATABASE_NAME', 'se')
 DB_USER = os.getenv('DATABASE_USER', 'se_user')
+DB_CONNINFO = f'dbname={DB_NAME} user={DB_USER}'
+ALLOWED_FILTERS = {"id", "definition_id", "explanation_id"}
 
 
 class TermRepository(
@@ -23,7 +25,7 @@ class TermRepository(
 
         term_ids: list[int] = []
 
-        with psycopg.connect(f'dbname={DB_NAME} user={DB_USER}') as conn:
+        with psycopg.connect(DB_CONNINFO) as conn:
             with conn.cursor() as cur:
                 for item in items:
                     cur.execute(
@@ -88,6 +90,20 @@ class TermRepository(
 
         return term_ids
 
+    def list(
+        self,
+        limit: int | None = None,
+        **filters: dict[str, Any]
+    ) -> list[TermProto]:
+        with psycopg.connect(DB_CONNINFO) as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT id, definition_id, explanation_id
+                    FROM glossary_term
+                    WHERE 
+                    """
+                )
 
 class InMemoryTermRepository(
     AddRepository[TermProto],

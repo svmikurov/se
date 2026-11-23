@@ -22,18 +22,19 @@ http://127.0.0.1:8200/ru/glossary/presentation/
 ## Infrastructure
 - [ ] service HTTP client handles request errors
 - [ ] server returns `404`
-- [x] in-memory term repository returns list of terms
-- [x] repository adds terms
 
 ## Service API
 - [x] GET `/presentation/` returns `200` + JSON {definition, explanation}
 - [ ] GET `/presentation/` returns `404` for unknown
 - [ ] GET `/presentation/` returns `500` on internal error
-- [ ] >> _**GET `/presentation/` returns `204` on `NoItemsForExercise` domain exception**_
+- [ ] GET `/presentation/` returns `204` if card is `None`
 - [x] Add DI
-- [x] use case gets terms via repository
+- [ ] use case gets terms via repository, term has Term model representation
+- [ ] convert Term to TermView (gets string representation fields via repo query)
+- [ ] TermView has definition text and explanation text
 
 ## Domain
 - [x] presentation model returns presentation object-value
 - [ ] created random presentation card (fix hardcoded presentation card)
 - [x] repository provides terms for presentation card creation
+- [ ] Term model has definition ID and explanation ID
