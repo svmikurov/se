@@ -28,8 +28,9 @@
       "pytestmark",
       "addopts",
       "testpaths",
-      // DB
+      // DB (psycopg)
       "dict_row",
+      "conninfo",
       // Sphinx
       "toctree",
       // Docker
