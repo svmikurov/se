@@ -17,14 +17,13 @@ class TermRepository(
     AddRepository[PresentationCardProto],
     ListRepository[TermProto],
 ):
-
     def add(self, items: list[PresentationCardProto]) -> list[int]:
         if not items:
             return []
 
         term_ids: list[int] = []
 
-        with psycopg.connect(f"dbname={DB_NAME} user={DB_USER}") as conn:
+        with psycopg.connect(f'dbname={DB_NAME} user={DB_USER}') as conn:
             with conn.cursor() as cur:
                 for item in items:
                     cur.execute(
@@ -41,10 +40,10 @@ class TermRepository(
                         def_id = row
                     else:
                         cur.execute(
-                            "SELECT id FROM glossary_definition WHERE text = %s",
+                            'SELECT id FROM glossary_definition WHERE text = %s',  # noqa
                             (item.definition,),
                         )
-                        def_id = cur.fetchone()
+                        def_id = cur.fetchone()  # type: ignore[assignment]
 
                     cur.execute(
                         """
@@ -60,10 +59,10 @@ class TermRepository(
                         exp_id = row
                     else:
                         cur.execute(
-                            "SELECT id FROM glossary_explanation WHERE text = %s",
+                            'SELECT id FROM glossary_explanation WHERE text = %s',  # noqa
                             (item.explanation,),
                         )
-                        exp_id = cur.fetchone()
+                        exp_id = cur.fetchone()  # type: ignore[assignment]
 
                     cur.execute(
                         """
@@ -71,12 +70,12 @@ class TermRepository(
                         VALUES (%s, %s)
                         ON CONFLICT (definition_id, explanation_id) DO NOTHING
                         RETURNING id
-                        """,
+                        """,  # noqa
                         (def_id, exp_id),
                     )
                     row = cur.fetchone()
                     if row is not None:
-                        term_ids.append(row)
+                        term_ids.append(row)  # type: ignore[arg-type]
                     else:
                         cur.execute(
                             """
@@ -85,10 +84,9 @@ class TermRepository(
                             """,
                             (def_id, exp_id),
                         )
-                        term_ids.append(cur.fetchone())
+                        term_ids.append(cur.fetchone())  # type: ignore[arg-type]
 
         return term_ids
-
 
 
 class InMemoryTermRepository(
@@ -98,8 +96,12 @@ class InMemoryTermRepository(
     def __init__(self) -> None:
         self._terms: set[TermProto] = set()
 
-    def add(self, items: list[TermProto]) -> None:
+    # REFACTOR: Update item adding in in-memory repo
+    def add(self, items: list[TermProto]) -> list[int]:
+        current_ids = [term.id for term in self._terms]
         self._terms.update(items)
+        updated_ids = [term.id for term in self._terms]
+        return list(set(updated_ids) - set(current_ids))
 
     def list(
         self,

@@ -6,7 +6,7 @@ from typing import Any
 
 class AddRepository[Item](ABC):
     @abstractmethod
-    def add(self, items: list[Item]) -> None: ...
+    def add(self, items: list[Item]) -> list[int]: ...
 
 
 class ListRepository[Item](ABC):
