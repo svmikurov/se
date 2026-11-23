@@ -2,44 +2,45 @@
 
 __all__ = [
     # === Interfaces ===
-    #  - object fields
-    'HasIdentifier',
+    'HasID',
+    'HasDefinitionID',
+    'HasMeaningID',
     'HasDefinition',
-    'HasExplanation',
-    # - object-values
-    'PresentationCardProto',
-    # - entities
-    'TermProto',
-    # - services
-    'PresentationDomainProto',
+    'HasMeaning',
+    'HasQuestion',
+    'HasAnswer',
+    'Displayed',
+    'Learnable',
+    'PresentationProto',
     #
     # === Implementation ===
-    #  - value-objects
-    'PresentationCard',
-    # - entities
+    'Card',
     'Term',
-    # - services
     'PresentationDomain',
     #
     # === Exceptions ===
     'NoItemsForExercise',
 ]
 
-from .exceptions import (
-    NoItemsForExercise,
-)
-from .models import (
+from .entities import (
     PresentationDomain,
     Term,
 )
+from .exceptions import (
+    NoItemsForExercise,
+)
 from .protocols import (
+    Displayed,
+    HasAnswer,
     HasDefinition,
-    HasExplanation,
-    HasIdentifier,
-    PresentationCardProto,
-    PresentationDomainProto,
-    TermProto,
+    HasDefinitionID,
+    HasID,
+    HasMeaning,
+    HasMeaningID,
+    HasQuestion,
+    Learnable,
+    PresentationProto,
 )
 from .values import (
-    PresentationCard,
+    Card,
 )

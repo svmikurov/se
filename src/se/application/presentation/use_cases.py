@@ -6,27 +6,33 @@ from se.domain import NoItemsForExercise
 
 if TYPE_CHECKING:
     from se.domain.protocols import (
-        PresentationCardProto,
-        PresentationDomainProto,
-        TermProto,
+        Displayed,
+        Learnable,
+        PresentationProto,
     )
 
-    from . import PresentationRepositoryProto
+    from . import (
+        CardRepositoryProto,
+        HasList,
+    )
 
 
 class PresentationUseCase:
     def __init__(
         self,
-        domain: PresentationDomainProto[TermProto],
-        repo: PresentationRepositoryProto[TermProto],
+        domain: PresentationProto,
+        term_repo: HasList[Learnable],
+        card_repo: CardRepositoryProto[Learnable, Displayed],
     ) -> None:
         self._domain = domain
-        self._repo = repo
+        self._term_repo = term_repo
+        self._card_repo = card_repo
 
-    def handle(self) -> PresentationCardProto | None:
-        terms: list[TermProto] = self._repo.list()
+    def handle(self) -> Displayed | None:
+        terms: list[Learnable] = self._term_repo.list()
         try:
-            term_presentation_card = self._domain.create_card(terms)
+            term_case = self._domain.choose(terms)
         except NoItemsForExercise:
             return None
-        return term_presentation_card
+        term_card = self._card_repo.get_card(term_case)
+        return term_card

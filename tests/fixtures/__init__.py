@@ -1,1 +1,0 @@
-"""WEB BFF test fixtures."""

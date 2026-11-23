@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
-from se.domain.values import PresentationCard
+from se.domain.values import Card
 
 
 class PresentationSchema(BaseModel):
-    presentation: PresentationCard
+    presentation: Card

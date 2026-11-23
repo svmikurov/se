@@ -1,13 +1,23 @@
-"""Protocols for domain interface."""
+"""Protocols for exercise domain interface."""
 
 from typing import Protocol
 
 # Model fields
 
 
-class HasIdentifier(Protocol):
+class HasID(Protocol):
     @property
     def id(self) -> int: ...
+
+
+class HasDefinitionID(Protocol):
+    @property
+    def definition_id(self) -> int: ...
+
+
+class HasMeaningID(Protocol):
+    @property
+    def meaning_id(self) -> int: ...
 
 
 class HasDefinition(Protocol):
@@ -15,17 +25,27 @@ class HasDefinition(Protocol):
     def definition(self) -> str: ...
 
 
-class HasExplanation(Protocol):
+class HasMeaning(Protocol):
     @property
-    def explanation(self) -> str: ...
+    def meaning(self) -> int: ...
+
+
+class HasQuestion(Protocol):
+    @property
+    def question(self) -> str: ...
+
+
+class HasAnswer(Protocol):
+    @property
+    def answer(self) -> str: ...
 
 
 # Value-objects
 
 
-class PresentationCardProto(
+class Displayed(
     HasDefinition,
-    HasExplanation,
+    HasMeaning,
     Protocol,
 ): ...
 
@@ -33,10 +53,10 @@ class PresentationCardProto(
 # Entities
 
 
-class TermProto(
-    HasIdentifier,
-    HasDefinition,
-    HasExplanation,
+class Learnable(
+    HasID,
+    HasDefinitionID,
+    HasMeaningID,
     Protocol,
 ): ...
 
@@ -44,5 +64,5 @@ class TermProto(
 # Services
 
 
-class PresentationDomainProto[Item](Protocol):
-    def create_card(self, items: list[Item]) -> PresentationCardProto: ...
+class PresentationProto(Protocol):
+    def choose(self, contenders: list[Learnable]) -> Learnable: ...

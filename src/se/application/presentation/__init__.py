@@ -5,12 +5,14 @@ __all__ = [
     'PresentationUseCaseProto',
     'HasList',
     'HasAdd',
-    'PresentationRepositoryProto',
+    'TermRepositoryProto',
+    'CardRepositoryProto',
 ]
 
 from .protocols import (
+    CardRepositoryProto,
     HasAdd,
     HasList,
-    PresentationRepositoryProto,
     PresentationUseCaseProto,
+    TermRepositoryProto,
 )

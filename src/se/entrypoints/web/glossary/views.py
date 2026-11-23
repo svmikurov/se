@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, override
 from dependency_injector.wiring import Provide, inject
 from django.views.generic.base import TemplateView
 
-from se.domain.protocols import PresentationCardProto
+from se.domain.protocols import Displayed
 from se.entrypoints.web.core.base.views import RequestHandlerMixin
 from se.entrypoints.web.di import Container
 
@@ -17,7 +17,7 @@ if TYPE_CHECKING:
 
     from ..core.handlers.protocols import RequestHandlerProto
 
-    type _RequestHandlerT = RequestHandlerProto[PresentationCardProto]
+    type _RequestHandlerT = RequestHandlerProto[Displayed]
 
 
 class IndexView(TemplateView):
@@ -25,7 +25,7 @@ class IndexView(TemplateView):
 
 
 class PresentationView(
-    RequestHandlerMixin[PresentationCardProto],
+    RequestHandlerMixin[Displayed],
     TemplateView,
 ):
     """Translation study test exercise view."""
@@ -50,5 +50,5 @@ class PresentationView(
         data = super().get_handler_data()
         result = self.request_handler.handle()
         data['definition_text'] = result.definition
-        data['explanation_text'] = result.explanation
+        data['explanation_text'] = result.meaning
         return data

@@ -1,25 +1,23 @@
 """Term repository."""
 
 import os
-from typing import Any
 
 import psycopg
 
-from se.domain import PresentationCardProto, TermProto
+from se.domain import Displayed
 
-from .abstract import AddRepository, ListRepository
+from .abstract import AddRepository
 
 DB_NAME = os.getenv('DATABASE_NAME', 'se')
 DB_USER = os.getenv('DATABASE_USER', 'se_user')
 DB_CONNINFO = f'dbname={DB_NAME} user={DB_USER}'
-ALLOWED_FILTERS = {"id", "definition_id", "explanation_id"}
+ALLOWED_FILTERS = {'id', 'definition_id', 'explanation_id'}
 
 
 class TermRepository(
-    AddRepository[PresentationCardProto],
-    ListRepository[TermProto],
+    AddRepository[Displayed],
 ):
-    def add(self, items: list[PresentationCardProto]) -> list[int]:
+    def add(self, items: list[Displayed]) -> list[int]:
         if not items:
             return []
 
@@ -54,7 +52,7 @@ class TermRepository(
                         ON CONFLICT (text) DO NOTHING
                         RETURNING id
                         """,
-                        (item.explanation,),
+                        (item.meaning,),
                     )
                     row = cur.fetchone()
                     if row is not None:
@@ -62,7 +60,7 @@ class TermRepository(
                     else:
                         cur.execute(
                             'SELECT id FROM glossary_explanation WHERE text = %s',  # noqa
-                            (item.explanation,),
+                            (item.meaning,),
                         )
                         exp_id = cur.fetchone()  # type: ignore[assignment]
 
@@ -89,39 +87,3 @@ class TermRepository(
                         term_ids.append(cur.fetchone())  # type: ignore[arg-type]
 
         return term_ids
-
-    def list(
-        self,
-        limit: int | None = None,
-        **filters: dict[str, Any]
-    ) -> list[TermProto]:
-        with psycopg.connect(DB_CONNINFO) as conn:
-            with conn.cursor() as cur:
-                cur.execute(
-                    """
-                    SELECT id, definition_id, explanation_id
-                    FROM glossary_term
-                    WHERE 
-                    """
-                )
-
-class InMemoryTermRepository(
-    AddRepository[TermProto],
-    ListRepository[TermProto],
-):
-    def __init__(self) -> None:
-        self._terms: set[TermProto] = set()
-
-    # REFACTOR: Update item adding in in-memory repo
-    def add(self, items: list[TermProto]) -> list[int]:
-        current_ids = [term.id for term in self._terms]
-        self._terms.update(items)
-        updated_ids = [term.id for term in self._terms]
-        return list(set(updated_ids) - set(current_ids))
-
-    def list(
-        self,
-        limit: int | None = None,
-        **filters: dict[str, Any],
-    ) -> list[TermProto]:
-        return list(self._terms)

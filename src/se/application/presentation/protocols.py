@@ -1,12 +1,12 @@
 from typing import Any, Protocol
 
-from se.domain.protocols import PresentationCardProto
+from se.domain import Displayed
 
 # Use cases
 
 
 class PresentationUseCaseProto(Protocol):
-    def handle(self) -> PresentationCardProto | None: ...
+    def handle(self) -> Displayed | None: ...
 
 
 # Repositories
@@ -24,8 +24,12 @@ class HasList[Item](Protocol):
     ) -> list[Item]: ...
 
 
-class PresentationRepositoryProto[Item](
+class TermRepositoryProto[Item](
     HasAdd[Item],
     HasList[Item],
     Protocol,
 ): ...
+
+
+class CardRepositoryProto[Item, Card](Protocol):
+    def get_card(self, item: Item) -> Card: ...
