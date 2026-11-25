@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/e2e/Dockerfile
+    pull_policy: never
     working_dir: /tests
     networks:
       - se-dev-net

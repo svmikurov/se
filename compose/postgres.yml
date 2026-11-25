@@ -1,6 +1,7 @@
 services:
   postgres:
     image: postgres:17
+    pull_policy: never
     environment:
       - POSTGRES_DB=${DATABASE_NAME}
       - POSTGRES_USER=${DATABASE_USER}

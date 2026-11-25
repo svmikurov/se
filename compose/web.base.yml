@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/web/Dockerfile
+    pull_policy: never
     environment:
       DJANGO_SECRET_KEY_FILE: /run/secrets/web_secret_key
     secrets:
