@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.translation import gettext as _
 
 from se.infrastructure.db.admin.core.models import AbstractUserOwnedModel
+
 from .source import Source
 
 

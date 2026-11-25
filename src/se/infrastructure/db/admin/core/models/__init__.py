@@ -6,6 +6,6 @@ __all__ = [
 
 from .base import (
     AbstractUserOwnedModel,
-    UserOwnedMixin,
     TimestampedMixin,
+    UserOwnedMixin,
 )
