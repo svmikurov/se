@@ -2,7 +2,7 @@ from django.db import models
 from django.template.defaultfilters import truncatechars
 from django.utils.translation import gettext as _
 
-from se.infrastructure.db.admin.core.models import (
+from ...core.models import (
     AbstractUserOwnedModel,
     TimestampedMixin,
 )

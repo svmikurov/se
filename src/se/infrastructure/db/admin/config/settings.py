@@ -28,8 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Applications
-    'foreign.apps.ForeignConfig',
-    'glossary.apps.GlossaryConfig',
+    'se.infrastructure.db.admin.foreign.apps.ForeignConfig',
+    'se.infrastructure.db.admin.glossary.apps.GlossaryConfig',
 ]
 
 MIDDLEWARE = [
@@ -42,7 +42,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'config.urls'
+ROOT_URLCONF = 'se.infrastructure.db.admin.config.urls'
 
 TEMPLATES = [
     {
@@ -59,7 +59,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
+WSGI_APPLICATION = 'se.infrastructure.db.admin.config.wsgi.application'
 
 
 # Database

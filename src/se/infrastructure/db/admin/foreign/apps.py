@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class ForeignConfig(AppConfig):
-    name = 'foreign'
+    name = 'se.infrastructure.db.admin.foreign'
