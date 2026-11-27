@@ -4,4 +4,4 @@ ADMIN_SERVICE_PORT=8000
 DEV_UID=1000
 DEV_GID=1000
 
-DUMP_MODELS=auth.user, glossary
+DUMP_MODELS=auth.user glossary foreign

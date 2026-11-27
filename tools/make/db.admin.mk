@@ -5,7 +5,6 @@
 ADMIN_SERVICE_NAME   := admin
 DATABASE_SERVICE := postgres
 LOG_TAIL       := 200
-DUMP_MODELS    := auth.user glossary
 
 DC_ADMIN := docker compose \
 	--project-directory . \
@@ -65,7 +64,7 @@ admin-logs-db:  ## Follow Postgres logs in real time
 admin-dumpdata:  ## Dump DUMP_MODELS to dumps/dump-<timestamp>.json
 	@test -n "$(DUMP_MODELS)" || { echo "ERROR: DUMP_MODELS is empty"; exit 1; }
 	@mkdir -p dumps
-	@tmp=$$(mktemp dumps/.dump-XXXXXX.json); \
+	tmp=$$(mktemp dumps/.dump-XXXXXX.json); \
 	if $(DC_ADMIN) exec -T $(ADMIN_SERVICE_NAME) python manage.py dumpdata $(DUMP_MODELS) --indent 2 > $$tmp; then \
 		mv $$tmp dumps/dump-$$(date +%Y%m%d-%H%M%S).json; \
 		echo "dump written to dumps/"; \

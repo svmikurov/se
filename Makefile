@@ -2,6 +2,8 @@
 # Makefile commands
 # =============================================================================
 
+include .envs/db.admin
+
 include tools/make/docs.mk
 include tools/make/app.mk
 include tools/make/check.mk
