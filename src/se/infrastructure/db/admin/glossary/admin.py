@@ -12,7 +12,6 @@ from ..core.models import (
     SaveModelWithUserMixin,
     ShowShortTextMixin,
 )
-
 from . import models
 
 if TYPE_CHECKING:
